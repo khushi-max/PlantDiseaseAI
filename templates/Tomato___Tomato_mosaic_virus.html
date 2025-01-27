@@ -1,0 +1,251 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
+        integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+
+    <title>PLANT DISEASE DETECTION</title>
+
+    <style>
+    
+    #myDIV {
+        display : none;
+}
+    
+    
+    .button {
+		display: inline-block;
+		border-radius: 4px;
+		background-color: #0099ff;
+		border: none;
+		color: #FFFFFF;
+		text-align: center;
+		font-size: 28px;
+		padding: 20px;
+		width: 550px;
+		transition: all 0.5s;
+		cursor: pointer;
+		margin: 5px;
+	}
+	
+	.button span {
+		cursor: pointer;
+		display: inline-block;
+		position: relative;
+		transition: 0.5s;
+	}
+	
+	.button span:after {
+		content: '\00bb';
+		position: absolute;
+		opacity: 0;
+		top: 0;
+		right: -20px;
+		transition: 0.5s;
+	}
+	
+	.button:hover span {
+		padding-right: 25px;
+	}
+	
+	.button:hover span:after {
+		opacity: 1;
+		right: 0;
+	}
+    
+    
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        .card-style {
+            background-color: #dcdcdc;
+
+        }
+
+        .content {
+            padding: 15px;
+            color: white;
+            background-color: rgb(153, 156, 150);
+            /* font-size: 1rem; */
+        }
+
+        @media (max-width: 430px) and (min-width: 200px) {
+
+
+            .contents {
+                font-size: 0.6rem;
+                color: chartreuse;
+            }
+
+            .content-h1 {
+
+                font-size: 1rem;
+            }
+        }
+
+        .border img {
+            border-radius: 15px;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Plant Disease Detection</a>
+            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Help</button>
+        </div>
+    </nav>
+
+
+
+
+    <div class="container my-2">
+        <div class="row mb-5">
+
+            <div class="col-sm" style="margin-bottom: 23px;">
+                <span class="border border-primary">
+                    <img src="{{ user_image }}" alt="User Image" class="img-thumbnail">
+                    <!-- <img src="{{pred_output}}" alt="User Image" class="img-thumbnail"> -->
+
+
+                </span>
+            </div>
+
+            <div class="col-sm">
+
+                <div>
+                    <h1 style="padding: 15px; background-color: rgb(255, 102, 102); color: white;"
+                        class="text-center mb-5 content-h1 rounded">
+                        {{pred_output}} </h1>
+                </div>
+
+                <h2>Disease Name : </span></h2> </br>
+                <h2 style="line-height: 100%;">Tomato Mosaic Virus</h2>
+                <p><strong> Symptoms</strong></p>
+                <p>Symptoms can occur at any growth stage and any part of the plant can be affected; infected leaves generally exhibit a dark green mottling or mosaic; some strains of the virus can cause yellow mottling on the leaves; young leaves may be stunted or distorted; severely infected leaves may have raised green areas; fruit yields are reduced in infected plants; green fruit may have yellow blotches or necrotic spots; dark necrotic streaks may appear on the stems, petioles leaves and fruit. </P>
+<p><strong> Cause</strong></p>
+<p>Virus</p>
+                <hr class="w-100 mx-auto ">
+            </div>
+        </div>
+
+<div class="text-center mt-4 mb-4"">
+    
+       
+<button onclick="myFunction()" class="button" style="vertical-align:middle" ><span>Solution for Disease </span></button>
+ 
+ </div>
+ 
+ 
+<div id="myDIV">
+    <div>
+        <h2> Treatment </h2>
+        <p>Plant varieties that are resistant to the virus; heat treating seeds at 70°C (158°F) for 4 days or at 82–85°C (179.6–185°F) for 24 hours will help to eliminate any virus particles on the surface of the seeds; soaking seed for 15 min in 100 g/l of tri-sodium phosphate solution (TSP) can also eliminate virus particles - seeds should be rinsed thoroughly and laid out to dry after this treatment; if the virus is confirmed in the field, infected plants should be removed and destroyed to limit further spread; plant tomato on a 2-year rotation, avoiding susceptible crops such as peppers, eggplant, cucurbits and tobacco; disinfect all equipment when moving from infected areas of the field. </p>
+       <!-- <p><strong>Use any one Systemic Insecticide, which contain<i> Flonicamid 50%/ Thiamethoxam 25% WG / Imidacloprid -->
+                  <!--  17.8 Sl / Acetamiprid 20% SP.</i></strong></p>-->
+        <p><strong>There are no cures for viral diseases such as mosaic once a plant is infected. As a result, every effort should be made to prevent the disease from entering your garden.</strong></p>
+<p><strong>1.Fungicides will NOT treat this viral disease.</strong> </p>
+<p><strong>2.Plant resistant varieties when available or purchase transplants from a reputable source.</strong></p>
+<p><strong>3.Do NOT save seed from infected crops.</strong></p>
+<p><strong>4.Spot treat with least-toxic, natural pest control products, such as Safer Soap, Bon-Neem and diatomaceous earth, to reduce the number of disease carrying insects.</strong></p>
+<p><strong>5.Harvest-Guard® row cover will help keep insect pests off vulnerable crops/ transplants and should be installed until bloom.</strong></p>
+<p><strong>6.Remove all perennial weeds, using least-toxic herbicides, within 100 yards of your garden plot.</strong></p>
+<p><strong>7.The virus can be spread through human activity, tools and equipment. Frequently wash your hands and disinfect garden tools, stakes, ties, pots, greenhouse benches, etc. (one part bleach to 4 parts water) to reduce the risk of contamination.</strong></p>
+<p><strong>8.Avoid working in the garden during damp conditions (viruses are easily spread when plants are wet).</strong></p>
+<p><strong>9.Avoid using tobacco around susceptible plants. Cigarettes and other tobacco products may be infected and can spread the virus.</strong></p>
+<p><strong>10.Remove and destroy all infected plants (see Fall Garden Cleanup). Do NOT compost.</strong></p>
+
+        
+        
+    </div>
+
+
+<section>
+
+        <div class="container">
+            <h1 style="padding: 15px; background-color: rgb(153, 156, 150); color: white;"
+                class="text-center my-3 content-h1">
+                Recommended Products</h1>
+        </div>
+
+        <div class="container">
+
+
+            <div class="card-columns">
+                <div class="card ">
+                    <div class="card-body text-center card-style">
+                        <img style="border-radius: 10px;" class="img-fluid" src="https://www.planetnatural.com/wp-content/uploads/2013/03/harvest-guard-195x215.jpg" alt="">
+                        <h3 class="card-text">Harvest-Guard</h3>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body text-center card-style">
+                        <img style="border-radius: 10px;" class="img-fluid" src="https://www.planetnatural.com/wp-content/uploads/2016/04/vinegar-weed-kiiller-195x215.jpg" alt="">
+                        <h3 class="card-text">AllDown</h3>
+                    </div>
+                </div>
+                <div class="card ">
+                    <div class="card-body text-center card-style">
+                        <img style="border-radius: 10px" class="img-fluid" src="https://www.planetnatural.com/wp-content/uploads/2013/03/safer-soap-195x215.jpg" alt="">
+                        <h3 class="card-text">Safer Soap</h3>
+                    </div>
+                </div>
+                <div class="card ">
+                    <div class="card-body text-center card-style">
+                        <img style="border-radius: 10px;" class="img-fluid" src="https://www.planetnatural.com/wp-content/uploads/2013/03/bon-neem-195x215.jpg" alt="">
+                        <h3 class="card-text">Bon-Neem ||</h3>
+                    </div>
+                </div>
+                
+
+
+            </div>
+
+
+
+</div>
+
+
+
+
+
+
+            <!-- <div class="container-fluid contents"> -->
+            <h5 style="padding: 15px; background-color: rgb(153, 156, 150); color: white;"
+                class="text-center my-3 contents">
+               
+                prachivkothawade@gmail.com</h5>
+            <!-- </div> -->
+        </div>
+
+    </section>
+
+    
+
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+</script>
+
+
+</body>
+
+</html>

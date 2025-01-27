@@ -1,0 +1,368 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
+        integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+
+<script>
+// When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+    document.getElementById("navbar").style.padding = "30px 10px";
+    document.getElementById("logo").style.fontSize = "25px";
+  } else {
+    document.getElementById("navbar").style.padding = "80px 10px";
+    document.getElementById("logo").style.fontSize = "35px";
+  }
+}
+</script>
+  <script>
+function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+</script>
+    <title>PLANT DISEASE DETECTION</title>
+
+    <style>
+    #navbar {
+      overflow: hidden;
+      background-color: #f1f1f1;
+      padding: 90px 70px;
+      transition: 0.4s;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 99;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.7) 100%) , url(/static/images/plant.jpg);
+    }
+
+    #navbar a {
+      float: left;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      text-decoration: none;
+      font-size: 18px; 
+      line-height: 25px;
+      border-radius: 4px;
+    }
+
+    #navbar #logo {
+      font-size: 35px;
+      font-weight: bold;
+      transition: 0.4s;
+    }
+
+    #navbar a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    #navbar a.active {
+      background-color: #008000;
+      color: white;
+    }
+
+    #navbar-right {
+      float: right;
+    }
+
+    @media screen and (max-width: 580px) {
+      #navbar {
+        padding: 20px 10px !important;
+      }
+      #navbar a {
+        float: none;
+        display: block;
+        text-align: left;
+      }
+      #navbar-right {
+        float: none;
+      }
+    }
+    .button {
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+
+    .button1 {border-radius: 50%;}
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+
+
+        }
+
+        .carousel-inner img {
+            height: 30vh;
+        }
+    #myDIV {
+        display : none;
+}
+    
+    
+    .button {
+		display: inline-block;
+		border-radius: 4px;
+		background-color: #0099ff;
+		border: none;
+		color: #FFFFFF;
+		text-align: center;
+		font-size: 28px;
+		padding: 20px;
+		width: 550px;
+		transition: all 0.5s;
+		cursor: pointer;
+		margin: 5px;
+	}
+	
+	.button span {
+		cursor: pointer;
+		display: inline-block;
+		position: relative;
+		transition: 0.5s;
+	}
+	
+	.button span:after {
+		content: '\00bb';
+		position: absolute;
+		opacity: 0;
+		top: 0;
+		right: -20px;
+		transition: 0.5s;
+	}
+	
+	.button:hover span {
+		padding-right: 25px;
+	}
+	
+	.button:hover span:after {
+		opacity: 1;
+		right: 0;
+	}
+    
+    
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        .card-style {
+            background-color: #dcdcdc;
+
+        }
+
+        .content {
+            padding: 15px;
+            color: white;
+            background-color: rgb(153, 156, 150);
+            /* font-size: 1rem; */
+        }
+
+        @media (max-width: 430px) and (min-width: 200px) {
+
+
+            .contents {
+                font-size: 0.6rem;
+                color: chartreuse;
+            }
+
+            .content-h1 {
+
+                font-size: 1rem;
+            }
+        }
+
+        .border img {
+            border-radius: 15px;
+            border: 2px solid black;
+        }
+    </style>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+</head>
+
+<body>
+ <div id="navbar">
+  <a href="#default" id="logo" >PLANT DISEASE PREDICTION</a>
+  <div id="navbar-right">
+    <a class="active" href="#home">Home</a>
+    <a href="#contact">Contact</a>
+    <a href="#about">About</a>
+  </div>
+</div>
+    
+   
+<div class="container">
+        <div id="content" style="margin-top:2em">{% block content %}{% endblock %}</div>
+    </div>
+    <div class="container">
+
+
+
+    <div class="container my-2">
+        <div class="row mb-5">
+
+            <div class="col-sm" style="margin-bottom: 23px;">
+                <span class="border border-primary">
+                    <img src="{{ user_image }}" alt="User Image" class="img-thumbnail">
+                    <!-- <img src="{{pred_output}}" alt="User Image" class="img-thumbnail"> -->
+
+
+                </span>
+            </div>
+
+            <div class="col-sm">
+
+                <div>
+                    <h1 style="padding: 15px; background-color: rgb(255, 102, 102); color: white;"
+                        class="text-center mb-5 content-h1 rounded">
+                        {{pred_output}} </h1>
+                </div>
+
+                <h2>Disease Name : </span></h2> </br>
+                <h2 style="line-height: 100%;">Apple Scab  </h2> </br>
+<p><strong> Symptoms</strong></p>
+<p>Yellow or chlorotic spots on leaves; dark olive green spots on leaves and fruit; may be a velvety growth on spots on undersides of leaves; twisting of leaves; distorted leaves; severely infected leaves turn yellow and drop from tree.</p>
+<p><strong> Cause</strong></p>
+<p>Fungus</p>
+                <hr class="w-100 mx-auto ">
+            </div>
+        </div>
+
+<div class="text-center mt-4 mb-4"">
+    
+       
+<button onclick="myFunction()" class="button" style="vertical-align:middle" ><span>Solution for Disease </span></button>
+ 
+ </div>
+ 
+ 
+<div id="myDIV">
+    <div>
+        <h2> Treatment </h2>
+        <p>Remove all leaves dropped from tree in the fall and compost to prevent any diseases surviving in debris; application of zinc and fertilizer grade urea in the Fall may be necessary to speed leaf drop, lime should then be added to fallen leaves; fungicide application may be necessary in areas where leaves remain wet for periods in excess of 9 hours; fungicides such as copper soaps and Bordeaux mixture should be applied if there is a chance of wet period as soon as leaf tips emerge. </p>
+       <!-- <p><strong>Use any one Systemic Insecticide, which contain<i> Flonicamid 50%/ Thiamethoxam 25% WG / Imidacloprid -->
+                  <!--  17.8 Sl / Acetamiprid 20% SP.</i></strong></p>-->
+        <p><strong>1.Choose resistant varieties when possible.</strong></p>
+<p><strong>2.Rake under trees and destroy infected leaves to reduce the number of fungal spores available to start the disease cycle over again next spring.</strong> </p>
+<p><strong>3.Water in the evening or early morning hours (avoid overhead irrigation) to give the leaves time to dry out before infection can occur.</strong></p>
+<p><strong>4.Spread a 3- to 6-inch layer of compost under trees, keeping it away from the trunk, to cover soil and prevent splash dispersal of the fungal spores.</strong></p>
+<p><strong>5.For best control, spray liquid copper soap early, two weeks before symptoms normally appear. Alternatively, begin applications when disease first appears, and repeat at 7 to 10 day intervals up to blossom drop.</strong></p>
+<p><strong>6.Bonide® Sulfur Plant Fungicide, a finely ground wettable powder, is used in pre-blossom applications and must go on before rainy or spore discharge periods. Apply from pre-pink through cover (2 Tbsp/ gallon of water), or use in cover sprays up to the day of harvest.</strong></p>
+   <p><strong>7.Organocide® Plant Doctor is an earth-friendly systemic fungicide that works its way through the entire plant to combat a large number of diseases on ornamentals, turf, fruit and more. Apply as a soil drench or foliar spray (3-4 tsp/ gallon of water) to prevent and attack fungal problems.</strong></p>
+    <p><strong>8.Containing sulfur and pyrethrins, Bonide® Orchard Spray is a safe, one-hit concentrate for insect attacks and fungal problems. For best results, apply as a protective spray (2.5 oz/ gallon) early in the season. If disease, insects or wet weather are present, mix 5 oz in one gallon of water. Thoroughly spray all parts of the plant, especially new shoots.
+</strong></p>
+        
+                
+        
+    </div>
+
+
+<section>
+
+        <div class="container">
+            <h1 style="padding: 15px; background-color: rgb(153, 156, 150); color: white;"
+                class="text-center my-3 content-h1">
+                Recommended Products</h1>
+        </div>
+
+        <div class="container">
+
+
+            <div class="card-columns">
+                <div class="card ">
+                    <div class="card-body text-center card-style">
+                        <img style="border-radius: 10px;" class="img-fluid" src="https://www.planetnatural.com/wp-content/uploads/2013/03/plant-doctor-195x215.jpg" alt="">
+                        <h3 class="card-text">Plant Doctor</h3>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body text-center card-style">
+                        <img style="border-radius: 10px;" class="img-fluid" src="https://www.planetnatural.com/wp-content/uploads/2013/03/3-in-1-garden-spray-195x215.jpg" alt="">
+                        <h3 class="card-text">3-in-1 Spray</h3>
+                    </div>
+                </div>
+                <div class="card ">
+                    <div class="card-body text-center card-style">
+                        <img style="border-radius: 10px" class="img-fluid" src="https://www.planetnatural.com/wp-content/uploads/2013/03/sulfur-fungicide-215x215.jpg" alt="">
+                        <h3 class="card-text">Sulfur Plant Fungicide</h3>
+                    </div>
+                </div>
+                <div class="card ">
+                    <div class="card-body text-center card-style">
+                        <img style="border-radius: 10px;" class="img-fluid" src="https://www.planetnatural.com/wp-content/uploads/2014/01/orchard-spray-195x215.jpg" alt="">
+                        <h3 class="card-text">Orchard Spray</h3>
+                    </div>
+                </div>
+                
+
+
+            </div>
+
+
+
+</div>
+
+
+
+
+
+
+            <!-- <div class="container-fluid contents"> -->
+            <h5 style="padding: 15px; background-color: rgb(153, 156, 150); color: white;"
+                class="text-center my-3 contents">
+                prachivkothawade@gmail.com</h5>
+            <!-- </div> -->
+        </div>
+
+    </section>
+
+    
+
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+</script>
+
+
+</body>
+
+</html>

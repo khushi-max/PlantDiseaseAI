@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.1/css/bootstrap.min.css"
+        integrity="sha384-VCmXjywReHh4PwowAiWNagnWcLhlEJLA5buUprzK8rxFgeH0kww/aWY76TfkUoSX" crossorigin="anonymous">
+
+    <title>PLANT DISEASE DETECTION</title>
+
+    <style>
+    
+    #myDIV {
+        display : none;
+}
+    
+    
+    .button {
+		display: inline-block;
+		border-radius: 4px;
+		background-color: #0099ff;
+		border: none;
+		color: #FFFFFF;
+		text-align: center;
+		font-size: 28px;
+		padding: 20px;
+		width: 550px;
+		transition: all 0.5s;
+		cursor: pointer;
+		margin: 5px;
+	}
+	
+	.button span {
+		cursor: pointer;
+		display: inline-block;
+		position: relative;
+		transition: 0.5s;
+	}
+	
+	.button span:after {
+		content: '\00bb';
+		position: absolute;
+		opacity: 0;
+		top: 0;
+		right: -20px;
+		transition: 0.5s;
+	}
+	
+	.button:hover span {
+		padding-right: 25px;
+	}
+	
+	.button:hover span:after {
+		opacity: 1;
+		right: 0;
+	}
+    
+    
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+        }
+
+        .card-style {
+            background-color: #dcdcdc;
+
+        }
+
+        .content {
+            padding: 15px;
+            color: white;
+            background-color: rgb(153, 156, 150);
+            /* font-size: 1rem; */
+        }
+
+        @media (max-width: 430px) and (min-width: 200px) {
+
+
+            .contents {
+                font-size: 0.6rem;
+                color: chartreuse;
+            }
+
+            .content-h1 {
+
+                font-size: 1rem;
+            }
+        }
+
+        .border img {
+            border-radius: 15px;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <div class="container">
+            <a class="navbar-brand" href="#">Plant Disease Detection</a>
+            <button class="btn btn-outline-secondary my-2 my-sm-0" type="submit">Help</button>
+        </div>
+    </nav>
+
+
+
+
+    <div class="container my-2">
+        <div class="row mb-5">
+
+            <div class="col-sm" style="margin-bottom: 23px;">
+                <span class="border border-primary">
+                    <img src="{{ user_image }}" alt="User Image" class="img-thumbnail">
+                    <!-- <img src="{{pred_output}}" alt="User Image" class="img-thumbnail"> -->
+
+
+                </span>
+            </div>
+
+            <div class="col-sm">
+
+                <div>
+                    <h1 style="padding: 15px; background-color: rgb(255, 102, 102); color: white;"
+                        class="text-center mb-5 content-h1 rounded">
+                        {{pred_output}} </h1>
+                </div>
+
+                <h2>Disease Name : </span></h2> </br>
+                <h2 style="line-height: 100%;">Early Blight  </h2>
+<p><strong> Symptoms</strong></p>
+<p>Dark lesions with yellow border which may form concentric rings of raised and sunken tissue on the leaves and stems; lesions initially circular but become angular; leaves become necrotic but remain attached to plant; dark, dry lesions on tubers with leathery or corky texture and watery yellow0green margins</p>
+<p><strong> Cause</strong></p>
+<p>Fungus</p>
+                <hr class="w-100 mx-auto ">
+            </div>
+        </div>
+
+<div class="text-center mt-4 mb-4"">
+    
+       
+<button onclick="myFunction()" class="button" style="vertical-align:middle" ><span>Solution for Disease </span></button>
+ 
+ </div>
+ 
+ 
+<div id="myDIV">
+    <div>
+        <h2> Treatment </h2>
+        <p> Application of appropriate protective fungicide can reduce severity of foliar symptoms; reduce stress to plants by fertilizing and watering adequately; plant late varieties which are less susceptible to disease; store tubers in cool environment</p>
+       <!-- <p><strong>Use any one Systemic Insecticide, which contain<i> Flonicamid 50%/ Thiamethoxam 25% WG / Imidacloprid -->
+                  <!--  17.8 Sl / Acetamiprid 20% SP.</i></strong></p>-->
+        <p><strong>1.Prune or stake plants to improve air circulation and reduce fungal problems.</strong></p>
+<p><strong>2.Make sure to disinfect your pruning shears (one part bleach to 4 parts water) after each cut.</strong></p>
+<p><strong>3.Keep the soil under plants clean and free of garden debris. Add a layer of organic compost to prevent the spores from splashing back up onto vegetation.</strong></p>
+<p><strong>4.Drip irrigation and soaker hoses can be used to help keep the foliage dry.</strong></p>
+<p><strong>5.For best control, apply copper-based fungicides early, two weeks before disease normally appears or when weather forecasts predict a long period of wet weather. Alternatively, begin treatment when disease first appears, and repeat every 7-10 days for as long as needed.</strong></p>
+<p><strong>6.Containing copper and pyrethrins, Bonide® Garden Dust is a safe, one-step control for many insect attacks and fungal problems. For best results, cover both the tops and undersides of leaves with a thin uniform film or dust. Depending on foliage density, 10 oz will cover 625 sq ft. Repeat applications every 7-10 days, as needed.</strong></p>
+<p><strong>7.SERENADE Garden is a broad spectrum, preventative bio-fungicide recommended for the control or suppression of many important plant diseases. For best results, treat prior to foliar disease development or at the first sign of infection. Repeat at 7-day intervals or as needed.</strong></p>
+<p><strong>8.Remove and destroy all garden debris after harvest and practice crop rotation the following year.</strong></p>
+<p><strong>9.Burn or bag infected plant parts. Do NOT compost.</strong></p>
+
+        
+    </div>
+
+
+<section>
+
+        <div class="container">
+            <h1 style="padding: 15px; background-color: rgb(153, 156, 150); color: white;"
+                class="text-center my-3 content-h1">
+                Recommended Products</h1>
+        </div>
+
+        <div class="container">
+
+
+            <div class="card-columns">
+                <div class="card ">
+                    <div class="card-body text-center card-style">
+                        <img style="border-radius: 10px;" class="img-fluid" src="https://www.planetnatural.com/wp-content/uploads/2013/03/serenade-disease-control-195x215.jpg"alt="">
+                        <h3 class="card-text">Serenade Garden</h3>
+                    </div>
+                </div>
+                <div class="card">
+                    <div class="card-body text-center card-style">
+                        <img style="border-radius: 10px;" class="img-fluid" src="https://www.planetnatural.com/wp-content/uploads/2013/03/liquid-copper-spray-195x215.jpg" alt="">
+                        <h3 class="card-text">Liquid Copper Spray</h3>
+                    </div>
+                </div>
+                 <div class="card">
+                    <div class="card-body text-center card-style">
+                        <img style="border-radius: 10px;" class="img-fluid" src="https://www.planetnatural.com/wp-content/uploads/2013/03/liquid-copper-concentrate-195x215.jpg" alt="">
+                        <h3 class="card-text">Liquid Copper </h3>
+                    </div>
+                </div>
+                <div class="card ">
+                    <div class="card-body text-center card-style">
+                        <img style="border-radius: 10px;" class="img-fluid" src="https://www.planetnatural.com/wp-content/uploads/2013/03/garden-dust-195x215.jpg" alt="">
+                        <h3 class="card-text">Garden Dust(Bonide)</h3>
+                    </div>
+                </div>
+                
+
+
+            </div>
+
+
+
+</div>
+
+
+
+
+
+
+            <!-- <div class="container-fluid contents"> -->
+            <h5 style="padding: 15px; background-color: rgb(153, 156, 150); color: white;"
+                class="text-center my-3 contents">
+                prachivkothawade@gmail.com</h5>
+            <!-- </div> -->
+        </div>
+
+    </section>
+
+    
+
+
+<script>
+function myFunction() {
+  var x = document.getElementById("myDIV");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+  } else {
+    x.style.display = "block";
+  }
+}
+</script>
+
+
+</body>
+
+</html>

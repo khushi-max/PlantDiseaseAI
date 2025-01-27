@@ -1,0 +1,2774 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Plant Disease Detection</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Rowdies:wght@700&display=swap" rel="stylesheet">
+    <link class="jsbin" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1/themes/base/jquery-ui.css" rel="stylesheet" type="text/css" />
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+    <script class="jsbin" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.0/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+
+    <link href="https://cdn.bootcss.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.bootcss.com/popper.js/1.12.9/umd/popper.min.js"></script>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdn.bootcss.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">   
+      
+    <style>
+		
+	body { padding-top: 200px; }
+    
+    .footer {
+		display: flex;
+		flex-flow: row wrap;
+		padding: 30px 30px 20px 30px;
+		color: #20B2AA;
+		background-color: #000000;
+		border-top: 1px solid #e5e5e5;
+	}
+	<!-- Footer-->
+    .page-wrapper
+	{
+		position: absolute;
+		bottom: 0;
+		width: 100%;
+		z-index: 11111;
+		top: 35px;
+	}
+	
+	footer p, footer strong, footer b, footer {
+		color: #b0b0b0;
+	}
+	
+	.footer-top {
+		background: #303030;
+		background-size: cover;
+		background-position: center;
+		padding: 0 0 20px;
+		font-family: rubik;
+    	padding-top:30px;
+	
+	}
+	
+	.footer-top, .footer-bottom {
+		background-color: #1c1f2f;
+	}
+	
+	.footer-bottom {
+		padding: 15px 0;
+		border-top: 1px solid #313646;
+		background-color: #181828 !important;
+		color: #b0b0b0;
+		font-family: rubik;
+	}
+	color: #99a9b5;
+		padding-top: 15px;
+	}
+	
+	.footer-site-info {
+		font-size: 92.86%;
+	}
+	#footer-navigation, #footer-navigation li a:hover, .custom-footer, .custom-footer li a:hover {
+		color: white;
+	}
+	
+	#footer-navigation, #footer-navigation li a, .custom-footer, .custom-footer li a {
+		color: #99a9b5;
+		padding-top: 15px;
+	}
+	
+	.footer-bottom ul {
+		margin: 0;
+	}
+	.inline-inside {
+		font-size: 0;
+		line-height: 0;
+	}
+	.clearfix:after, .clearfix:before {
+		content: "";
+		display: table;
+	}
+	#footer-menu li {
+		display: inline-block;
+		padding: 0 21px;
+		position: relative;
+		line-height: 1;
+	}
+	
+	#footer-navigation, #footer-navigation li a, .custom-footer, .custom-footer li a {
+		color: #99a9b5;
+		padding-top: 15px;
+	}
+	
+	#footer-navigation, #footer-navigation li a, .custom-footer, .custom-footer li a {
+		color: #99a9b5;
+		padding-top: 15px;
+	}
+	#footer-menu li+li:before {
+		content: '';
+		width: 0;
+		height: 100%;
+		position: absolute;
+		left: -1px;
+		top: 0;
+		font-size: 0;
+		border-left: 1px solid #232234;
+		border-right: 1px solid #333146;
+	}
+	
+	
+	navigation li a, .custom-footer, .custom-footer li a {
+		color: #99a9b5;
+		padding-top: 15px;
+	}
+	
+	#footer-socials {
+		text-align: right;
+	}
+	
+	#footer-socials .socials {
+		text-align: right;
+		margin: 0 -7px;
+		display: inline-block;
+		vertical-align: middle;
+	}
+	
+	a.socials-item {
+		display: inline-block;
+		vertical-align: top;
+		text-align: center;
+		-o-transition: all 0.3s;
+		-webkit-transition: all 0.3s;
+		transition: all 0.3s;
+		margin: 0 5px;
+		line-height: 16px;
+		padding: 10px;
+		border-radius: 50%;
+		background-color: #141421;
+		border: 1px solid #2e2e4c;
+		box-shadow: 3px 9px 16px rgb(0,0,0,0.4), -3px -3px 10px rgba(255,255,255, 0.06), inset 14px 14px 26px rgb(0,0,0,0.3), inset -3px -3px 15px rgba(255,255,255, 0.05);
+	}
+	
+	.socials-item i {
+		display: inline-block;
+		font-weight: normal;
+		width: 1em;
+		height: 1em;
+		line-height: 1;
+		font-size: 16px;
+		text-align: center;
+		vertical-align: top;
+		font-feature-settings: normal;
+		font-kerning: auto;
+		font-language-override: normal;
+		font-size-adjust: none;
+		font-stretch: normal;
+		font-style: normal;
+		font-synthesis: weight style;
+		font-variant: normal;
+		font-weight: normal;
+		text-rendering: auto;
+	}
+	
+	.facebook {
+		color: #4e64b5;
+	}
+	
+	.twitter {
+		color: #00aced;
+	}
+	.instagram {
+		color: #9a8f62;
+	}
+	.youtube {
+		color: #c82929;
+	}
+	
+	.telegram {
+		color: #2ca5e0;
+	}
+	
+	
+	a.socials-item:hover {
+		box-shadow: 0 0px 20px rgba(84, 1, 74, 0.7);
+		border-color: rgba(255, 6, 224, 0.61);
+		background: linear-gradient(to right, rgba(255, 9, 9, 0.12941176470588237), #c000ffb5, rgba(255, 0, 94, 0.14));
+	}
+	
+	.footer-bottom a:hover {
+		color: white;
+	}
+	
+	
+	footer p, footer li {
+		font-size: 15px;
+		line-height: 22px;
+	}
+	
+	
+	.widget {
+		margin-bottom: 50px;
+	}
+	
+	.footer-title {
+		margin-bottom: 40px;
+		color: #fff;
+		font-weight: 500;
+		text-transform: capitalize;
+		padding-bottom: 15px;
+		font-size: 16px;
+		position: relative;
+	}
+	
+	.footer-title:after {
+		width: 50px;
+		background: #fff;
+		opacity: 0.2;
+		height: 1px;
+		content: "";
+		position: absolute;
+		bottom: 0;
+		left: 0;
+	}
+	
+	.gem-contacts-item {
+		padding-top: 10px;
+		font-size: 15px;
+	}
+	
+	.gem-contacts-item i {
+		padding-right: 10px;
+	}
+	
+	footer .widget ul {
+		list-style: none;
+		margin-top: 5px;
+	}
+	
+	.posts li {
+		border-bottom: 1px solid #393d50;
+		padding-bottom: 12px;
+		padding-top: 6px;
+	}
+	
+	footer p, footer li {
+		font-size: 15px;
+		line-height: 22px;
+	}
+	
+	.gem-pp-posts-date {
+		color: #00bcd4;
+		font-size: 89.5%;
+	}
+	.gem-pe-posts-date {
+		color: #F5ACDF;
+		font-size: 89.5%;
+	}
+	
+	footer p {
+		line-height: 24px;
+		margin-bottom: 10px;font-size: 15px;
+	}
+	
+	.wpcf7-form-control-wrap .wpcf7-form-control {
+		padding: 7px!important;
+		width: 100%;
+	}
+	
+	.wpcf7-form-control-wrap input {
+		background: #1c1f2f;
+		overflow: hidden;
+		border: 1px solid #2e344d;
+		background-color: #1c1f2f;
+		box-shadow: 10px 10px 36px rgb(0,0,0,0.5), -13px -13px 23px rgba(255,255,255, 0.03);
+		border-radius: 5px;
+		transition: all 0.3s ease-in-out 0s;
+	}
+	
+	.wpcf7-form-control-wrap input:hover {
+		background-color: transparent;
+		box-shadow: 10px 10px 36px rgb(0,0,0,0.5), -13px -13px 23px rgba(255,255,255, 0.03), inset 14px 14px 70px rgb(0,0,0,0.2), inset -15px -15px 30px rgba(255,255,255, 0.04);
+		border-color: rgba(255, 255, 255, 0.2);
+		color: white;
+	}
+	
+	.wpcf7 .wpcf7-form .contact-form-footer textarea {
+		height: 160px;
+		width: 100%;
+	}
+	
+	.wpcf7-form-control-wrap textarea:hover {
+		background-color: transparent;
+		box-shadow: 10px 10px 36px rgb(0,0,0,0.5), -13px -13px 23px rgba(255,255,255, 0.03), inset 14px 14px 70px rgb(0,0,0,0.2), inset -15px -15px 30px rgba(255,255,255, 0.04);
+		border-color: rgba(255, 255, 255, 0.2);
+		color: white;
+	}
+	
+	.wpcf7-form-control-wrap textarea {
+		background: #1c1f2f;
+		overflow: hidden;
+		border: 1px solid #2e344d;
+		background-color: #1c1f2f;
+		box-shadow: 10px 10px 36px rgb(0,0,0,0.5), -13px -13px 23px rgba(255,255,255, 0.03);
+		border-radius: 5px;
+		transition: all 0.3s ease-in-out 0s;
+	}
+	
+	textarea {
+		overflow: auto;
+		resize: vertical;
+	}
+	
+	.wpcf7 .wpcf7-form .contact-form-footer .wpcf7-submit {
+		width: 100%;
+		padding: 11px;
+		margin: 0;
+		line-height: 0;
+	}
+	.wpcf7-form .contact-form-footer .wpcf7-submit {
+		background-color: #394050;
+		color: #99a9b5;
+		border: none;
+		cursor: pointer;
+		padding: 15px 40px;
+		font-size: 14px;
+		font-weight: 400;
+		transition: all 0.5s;
+		letter-spacing: 2px;
+		color: rgba(255,255,255,.5);
+		box-shadow: none;
+		text-transform: uppercase;
+		outline: none !important;
+		background-color: #1c1f2f;
+		border-radius: 5px;
+		min-width: 140px;
+		/* box-shadow: 10px 10px 36px rgb(0,0,0,0.5), -13px -13px 23px rgba(255,255,255, 0.03), inset 14px 14px 70px rgb(0,0,0,0.2), inset -15px -15px 30px rgba(255,255,255, 0.04); */
+		box-shadow: 3px 9px 16px rgb(0,0,0,0.4), -3px -3px 10px rgba(255,255,255, 0.06), inset 14px 14px 26px rgb(0,0,0,0.3), inset -3px -3px 15px rgba(255,255,255, 0.05);
+		border-width: 1px 0px 0px 1px;
+		border-style: solid;
+		border-color: #2e344d;
+		transition: all 0.3s ease-in-out 0s;
+	}
+	
+	.wpcf7-form input[type=submit] {
+		height: 40px;
+		line-height: 21px;
+		padding: 10px 40px;
+		font-size: 14px;
+	}
+	
+	.posts li a {
+		color: #99a9b5;
+	}
+	
+	.wpcf7-form .contact-form-footer .wpcf7-submit:hover {
+		box-shadow: 0 0px 20px rgba(84, 1, 74, 0.7);
+		border-color: rgba(255, 6, 224, 0.61);
+		background: linear-gradient(to right, rgba(255, 9, 9, 0.12941176470588237), #c000ffb5, rgba(255, 0, 94, 0.14));
+		color: white;
+	}
+	
+	img {
+		border-style: none;
+		height: auto;
+		max-width: 100%;
+		vertical-align: middle;
+	}
+	.widget_gallery a {
+		display: inline-block;
+	}
+    footer .widget ul {
+		list-style: none;
+		margin-top: 5px;
+	}
+	.widget_gallery ul {
+		padding-left: 0;
+		display: table;
+	}
+	
+	.widget_gallery li {
+		display: inline-block;
+		width: 33.33%;
+		float: left;
+		transition: all 0.5s;
+		-webkit-transition: all 0.5s;
+		-moz-transition: all 0.5s;
+		-o-transition: all 0.5s;
+		padding: 2px;
+	}
+	
+	.widget_gallery.gallery-grid-4 li {
+		width: 30%;
+	}
+	
+	
+	#waterdrop {
+		height: 30px;
+	}
+	
+	#waterdrop canvas {
+		bottom: -70px !important;
+	}
+	
+	.footer-site-info
+	{
+	padding-top: 10px;
+	}
+	
+	
+        
+        <!-- End-->
+	<!-- Cards -->
+	.infocardContainer * {
+		font-family: 'Fira Sans Condensed', sans-serif;
+		font-weight: 300;
+	}
+	h2 {
+		font-weight: 600; font-style: italic; font-family: "Fira Sans Condensed", sans-serif;
+	}
+	header {
+		height: 2em;
+		background-color: #111122;
+		margin: 0 0 0 0;
+		padding: auto;
+		font-size: 2em;
+		text-align: center;
+		line-height: 2em;
+		color: white;
+	}
+	a {
+		text-decoration: none;
+	}
+	a:visited {
+		color: #555566;
+	}
+	a:hover {
+		text-decoration: underline;
+	}
+	.infocardContainer {
+		display: flex;
+		height: 200px;
+		width: 200px;
+		border-radius: 100px;
+		background: rgb(0,159,255);
+		background: linear-gradient(121deg, rgba(255,255,255,0) 13%, rgba(0,159,255,1) 100%);
+		transition: all 500ms ease-in;
+		transition-delay: 1s;
+		margin: auto;
+		margin-top: 100px;
+		--margin-top: 100px;
+	}
+	.infocardContainer:hover {
+		width: 500px;
+		border-radius: 100px 10px 100px 100px;
+		transition: all 1s ease-out;
+	}
+	
+	.infocardContainer div {
+		text-color: white;
+		flex-shrink: 1;
+		width: 100%;
+		--background-color: green;
+	}
+	.infocardContainer div * {
+		display: flex;
+		--flex: inherit;
+		overflow: hidden;
+		text-overflow: hidden;
+		--background-color: yellow;
+		color: white;
+		white-space: nowrap;
+		width: 0;
+		height: auto;
+		transition: all 450ms ease-in;
+		transition-delay: 1s;
+	}
+	.infocardContainer:hover div *{
+		--background-color: purple;
+		display: flex;
+		visibility: visible;
+		transition: all 1s ease-out;
+		transition-delay: 500ms;
+		width: 100%;
+		height: auto;
+	}
+	
+	.infocardContainer #main, .infocardContainer #main img{
+		--background-color: red;
+		height: 200px;
+		width: 200px;
+		padding-right: 10px;
+		border-radius: 100%;
+		flex-shrink: 0;
+		object-fit: cover;
+	}
+	.infocardContainer #main img{
+		height: 180px;
+		width: 180px;
+		transition: none;
+		display: float;
+		position: relative;
+		border: 10px solid white;
+		margin: 0 0 0 0; padding: 0 0 0 0;
+	}
+	.infocardContainer #textbois {
+		position: relative;
+	}
+	.infocardContainer #textbois #hotlinks {
+		max-width: 60%;
+		max-height: 30px;
+		
+		--background-color: white;
+		position:absolute;
+		bottom: 5px;
+		display: flex;
+		justify-content: space-between;
+		border-radius: 13px;
+	}
+	.infocardContainer #textbois #hotlinks * {
+		background-color: white;
+		max-width: 30px;
+		--margin: 0 1px 0 1px;
+		border-radius: 25px;
+	}
+	/*TODO: animate copy main transition style for info*/
+	.infocardContainer #textbois #hotlinks *:hover {
+	
+	
+	}
+	
+	<!-- End -->
+
+
+/* Main heading for card's front cover */
+	.card-front__heading {
+	font-size: 1.5rem;
+	margin-top: .25rem;
+	}
+	
+	/* Main heading for inside page */
+	.inside-page__heading { 
+	padding-bottom: 1rem; 
+	width: 100%;
+	}
+	
+	/* Mixed */
+	
+	/* For both inside page's main heading and 'view me' text on card front cover */
+	.inside-page__heading,
+	.card-front__text-view {
+	font-size: 1.3rem;
+	font-weight: 800;
+	margin-top: .2rem;
+	}
+	
+	.inside-page__heading--apple,
+	.card-front__text-view--apple { color: #FF3333; }
+	
+	.inside-page__heading--corn,
+	.card-front__text-view--corn { color: #FFD633; }
+	
+	.inside-page__heading--orange,
+	.card-front__text-view--orange { color: #fa7f67; }
+	
+	.inside-page__heading--grape,
+	.card-front__text-view--grape { color: #00b97c; }
+	
+	.inside-page__heading--peach,
+	.card-front__text-view--peach { color: #FF3374; }
+	
+	.inside-page__heading--pepperbell,
+	.card-front__text-view--pepperbell { color: #299548; }
+	
+	.inside-page__heading--potato,
+	.card-front__text-view--potato { color: #E0C341; }
+	
+	.inside-page__heading--cherry,
+	.card-front__text-view--cherry { color: #AB4444; }
+	
+	.inside-page__heading--squash,
+	.card-front__text-view--squash { color: #B6EE1C; }
+	
+	.inside-page__heading--strawberry,
+	.card-front__text-view--strawberry { color: #FBAFC6; }
+	
+	.inside-page__heading--tomato,
+	.card-front__text-view--tomato { color: #F90650; }
+	/* Front cover */
+	
+	.card-front__tp { color: #fafbfa; }
+	
+	/* For pricing text on card front cover */
+	.card-front__text-price {
+	font-size: 1.2rem;
+	margin-top: -.2rem;
+	}
+	
+	/* Back cover */
+	
+	/* For inside page's body text */
+	.inside-page__text {
+	color: #333;
+	}
+	
+	/* Icons ===========================================*/
+	
+	.card-front__icon {
+	fill: #fafbfa;
+	font-size: 3vw;
+	height: 3.25rem;
+	margin-top: -.5rem;
+	width: 3.25rem;
+	}
+	
+	/* Buttons =================================================*/
+	
+	.inside-page__btn {
+	background-color: transparent;
+	border: 3px solid;
+	border-radius: .5rem;
+	font-size: 1.2rem;
+	font-weight: 600;
+	margin-top: 2rem;
+	overflow: hidden;
+	padding: .7rem .75rem;
+	position: relative;
+	text-decoration: none;
+	transition: all .3s ease;
+	width: 90%;
+	z-index: 10;
+	}
+	
+	.inside-page__btn::before { 
+	content: "";
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	transform: scaleY(0);
+	transition: all .3s ease;
+	width: 100%;
+	z-index: -1;
+	}
+	
+	.inside-page__btn--apple { 
+	border-color: #FF3333;
+	color: #FF3333;
+	}
+	
+	.inside-page__btn--apple::before { 
+	background-color: #FF3333;
+	}
+	
+	.inside-page__btn--corn { 
+	border-color: #F3FF33;
+	color: #F3FF33;
+	}
+	
+	.inside-page__btn--corn::before { 
+	background-color: #F3FF33;
+	}
+	
+	.inside-page__btn--orange { 
+	border-color: #fa7f67;
+	color: #fa7f67;
+	}
+	
+	.inside-page__btn--orange::before { 
+	background-color: #fa7f67;
+	}
+	
+	.inside-page__btn--grape { 
+	border-color: #00b97d;
+	color: #00b97d;
+	}
+	
+	.inside-page__btn--grape::before { 
+	background-color: #00b97d;
+	}
+	
+	.inside-page__btn:hover { 
+	color: #fafbfa;
+	}
+	
+	.inside-page__btn:hover::before { 
+	transform: scaleY(1);
+	}
+	
+	/* Layout Structure=========================================*/
+	
+	.main {
+	background: linear-gradient(
+	to bottom right,
+	#eee8dd,
+	#e3d9c6
+	);
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	height: 100%;
+	width: 100%;
+	}
+	
+	/* Container to hold all cards in one place */
+	.card-area {
+	align-items: center;
+	display: flex;
+	flex-wrap: nowrap;
+	height: 100%;
+	justify-content: center;
+	padding: 1rem;
+	margin-top: .25rem;
+	}
+	
+	/* Card ============================================*/
+	
+	/* Area to hold an individual card */
+	.card-section {
+	align-items: center;
+	display: flex;
+	height: 100%;
+	justify-content: center;
+	width: 100%;
+	}
+	
+	/* A container to hold the flip card and the inside page */
+	.card {
+	background-color: rgba(0,0,0, .05);
+	box-shadow: -.1rem 1.7rem 6.6rem -3.2rem rgba(0,0,0,0.5);
+	height: 15rem;
+	position: relative;
+	transition: all 1s ease;
+	width: 15rem;
+	}
+	
+	/* Flip card - covering both the front and inside front page */
+	
+	/* An outer container to hold the flip card. This excludes the inside page */
+	.flip-card {
+	height: 15rem;
+	perspective: 100rem;
+	position: absolute;
+	right: 0;
+	transition: all 1s ease;
+	visibility: hidden;
+	width: 15rem;
+	z-index: 100;
+	}
+	
+	/* The outer container's visibility is set to hidden. This is to make everything within the container NOT set to hidden  */
+	/* This is done so content in the inside page can be selected */
+	.flip-card > * {
+	visibility: visible;
+	}
+	
+	/* An inner container to hold the flip card. This excludes the inside page */
+	.flip-card__container {
+	height: 100%;
+	position: absolute;
+	right: 0;
+	transform-origin: left;
+	transform-style: preserve-3d;
+	transition: all 1s ease;
+	width: 100%;
+	}
+	
+	.card-front,
+	.card-back {
+	backface-visibility: hidden;
+	height: 100%;
+	left: 0;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	}
+	
+	/* Styling for the front side of the flip card */
+	
+	/* container for the front side */
+	.card-front {
+	background-color: #fafbfa;
+	height: 15rem;
+	width: 15rem;
+	}
+	
+	/* Front side's top section */
+	.card-front__tp {
+	align-items: center;
+	clip-path: polygon(0 0, 100% 0, 100% 90%, 57% 90%, 50% 100%, 43% 90%, 0 90%);
+	display: flex;
+	flex-direction: column;
+	height: 12rem;
+	justify-content: center;
+	padding: .75rem;
+	}
+	
+	.card-front__tp--apple {
+	background: linear-gradient(
+	to bottom,
+	#FF3380 ,
+	#FF3333
+	);
+	}
+	
+	.card-front__tp--corn {
+	background: linear-gradient(
+	to bottom,
+	#FFD633,
+	#F3FF33
+	);
+	}
+	
+	.card-front__tp--orange {
+	background: linear-gradient(
+	to bottom,
+	#fb9b88,
+	#f86647
+	);
+	}
+	
+	.card-front__tp--grape {
+	background: linear-gradient(
+	to bottom,
+	#00db93,
+	#00b97d
+	);
+	}
+	
+	.card-front__tp--peach {
+	background: linear-gradient(
+	to bottom,
+	#FF9C33,
+	#FF3374
+	);
+	}
+	
+	.card-front__tp--pepperbell {
+	background: linear-gradient(
+	to bottom,
+	#FF4933,
+	#299548
+	);
+	}
+	
+	.card-front__tp--potato {
+	background: linear-gradient(
+	to bottom,
+	#E0DD41,
+	#E0C341
+	);
+	}
+	
+	.card-front__tp--cherry {
+	background: linear-gradient(
+	to bottom,
+	#C84141,
+	#9D4141
+	);
+	}
+	
+	.card-front__tp--squash {
+	background: linear-gradient(
+	to bottom,
+	#0E8E1C,
+	#B6EE1C
+	);
+	}
+	
+	.card-front__tp--strawberry {
+	background: linear-gradient(
+	to bottom,
+	#FBAFC6,
+	#FD0E56
+	);
+	}
+	
+	.card-front__tp--tomato {
+	background: linear-gradient(
+	to bottom,
+	#F90650,
+	#F90650
+	);
+	}
+	
+	/* Front card's bottom section */
+	.card-front__bt {
+	align-items: center;
+	display: flex;
+	justify-content: center;
+	}
+	
+	/* Styling for the back side of the flip card */
+	
+	.card-back {
+	background-color: #fafbfa;
+	transform: rotateY(180deg);
+	}
+	
+	/* Specifically targeting the <video> element */
+	.video__container {
+	clip-path: polygon(0% 0%, 100% 0%, 90% 50%, 100% 100%, 0% 100%);
+	height: auto;
+	min-height: 100%;
+	object-fit: cover;
+	width: 100%;
+	}
+	
+	/* Inside page */
+	
+	.inside-page {
+	background-color: #fafbfa;
+	box-shadow: inset 20rem 0px 5rem -2.5rem rgba(0,0,0,0.25);
+	height: 100%;
+	padding: 1rem;
+	position: absolute;
+	right: 0;
+	transition: all 1s ease;
+	width: 15rem;
+	z-index: 1;
+	}
+	
+	.inside-page__container {
+	align-items: center;
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	text-align: center; 
+	width: 100%;
+	}
+	
+	/* Functionality ====================================*/
+	
+	/* This is to keep the card centered (within its container) when opened */
+	.card:hover {
+	box-shadow:
+	-.1rem 1.7rem 6.6rem -3.2rem rgba(0,0,0,0.75);
+	width: 30rem;
+	}
+	
+	/* When the card is hovered, the flip card container will rotate */
+	.card:hover .flip-card__container {
+	transform: rotateY(-180deg);
+	}
+	
+	/* When the card is hovered, the shadow on the inside page will shrink to the left */
+	.card:hover .inside-page {
+	box-shadow: inset 1rem 0px 5rem -2.5rem rgba(0,0,0,0.1);
+	}
+	
+	/* Footer ====================================*/
+	
+	.footer {
+	background-color: #333;
+	margin-top: 3rem;
+	padding: 1rem 0;
+	width: 100%;
+	}
+	
+	.footer-text {
+	color: #fff;
+	font-size: 1.2rem;
+	text-align: center;
+	}
+
+
+
+
+	main {
+		padding: 0 64px 64px;
+	}
+	
+	
+	
+	/* General layout and typography stuff */
+	@import url("https://fonts.googleapis.com/css?family=Open+Sans:300,400");
+	
+	* {
+		box-sizing: border-box;
+		position: relative;
+		transition: all .3s ease
+	}
+	
+
+	
+	* {
+		margin: 0;
+		padding: 0;
+	}
+	
+	
+	[type=radio] {
+		display: none;
+	}
+	
+	#slider {
+		height: 25vw;
+		position: relative;
+		perspective: 1000px;
+		transform-style: preserve-3d;
+		padding-top: 40px;
+	}
+	
+	#slider label {
+		margin: auto;
+		width: 40%;
+		height: 80%;
+		border-radius: 4px;
+		position: absolute;
+		left: 0; right: 0;
+		cursor: pointer;
+		transition: transform 0.4s ease;
+	}
+	
+	
+	
+	
+	
+	  
+	#s1:checked ~ #slide8, #s2:checked ~ #slide9,
+	#s3:checked ~ #slide10,#s4:checked ~ #slide11,
+	#s5:checked ~ #slide12,#s6:checked ~ #slide13, 
+	#s7:checked ~ #slide1, #s8:checked ~ #slide2,
+	#s9:checked ~ #slide3, #s10:checked ~ #slide4,
+	#s11:checked ~#slide5, #s12:checked ~ #slide6,
+	#s13:checked ~#slide7 {
+	    box-shadow: 0 10px 4px 0 rgba(0,0,0,.37);
+		transform: translate3d(-90%,0,-250px);
+	}
+
+	#s1:checked ~ #slide9, #s2:checked ~ #slide10,
+	#s3:checked ~ #slide11,#s4:checked ~ #slide12,
+	#s5:checked ~ #slide13,#s6:checked ~ #slide1, 
+	#s7:checked ~ #slide2, #s8:checked ~ #slide3,
+	#s9:checked ~ #slide4, #s10:checked ~ #slide5,
+	#s11:checked ~#slide6, #s12:checked ~ #slide7,
+	#s13:checked ~#slide8 {
+	    box-shadow: 0 15px 10px 0 rgba(0,0,0,.3), 0 2px 2px 0 rgba(0,0,0,.2);
+		transform: translate3d(-75%,0,-200px);
+	}
+ 
+	
+	#s1:checked ~ #slide10, #s2:checked ~ #slide11,
+	#s3:checked ~ #slide12, #s4:checked ~ #slide13,
+	#s5:checked ~ #slide1,  #s6:checked ~ #slide2, 
+	#s7:checked ~ #slide3,  #s8:checked ~ #slide4,
+	#s9:checked ~ #slide5,  #s10:checked ~ #slide6,
+	#s11:checked ~#slide7, #s12:checked ~ #slide8,
+	#s13:checked ~#slide9 {
+	    box-shadow: 0 20px 14px 0 rgba(0,0,0,.3), 0 6px 7px 0 rgba(0,0,0,.19);
+		transform: translate3d(-60%,0,-150px);
+	}
+
+    #s1:checked ~ #slide11, #s2:checked ~ #slide12,
+	#s3:checked ~ #slide13, #s4:checked ~ #slide1,
+	#s5:checked ~ #slide2,  #s6:checked ~ #slide3, 
+	#s7:checked ~ #slide4,  #s8:checked ~ #slide5,
+	#s9:checked ~ #slide6,  #s10:checked ~ #slide7,
+	#s11:checked ~#slide8, #s12:checked ~ #slide9,
+	#s13:checked ~#slide10 {
+	    box-shadow: 0 25px 24px 0 rgba(0,0,0,.3), 0 9px 11px 0 rgba(0,0,0,.30);
+		transform: translate3d(-45%,0,-100px);
+	}
+	
+	#s1:checked ~ #slide12, #s2:checked ~ #slide13,
+	#s3:checked ~ #slide1, #s4:checked ~ #slide2,
+	#s5:checked ~ #slide3,  #s6:checked ~ #slide4, 
+	#s7:checked ~ #slide5,  #s8:checked ~ #slide6,
+	#s9:checked ~ #slide7,  #s10:checked ~ #slide8,
+	#s11:checked ~#slide9, #s12:checked ~ #slide10,
+	#s13:checked ~#slide11 {
+		box-shadow: 0 30px 34px 0 rgba(0,0,0,.3), 0 11px 16px 0 rgba(0,0,0,.43);
+		transform: translate3d(-30%,0,-50px);
+	}
+	
+	#s1:checked ~ #slide13, #s2:checked ~ #slide1,
+	#s3:checked ~ #slide2, #s4:checked ~ #slide3,
+	#s5:checked ~ #slide4,  #s6:checked ~ #slide5, 
+	#s7:checked ~ #slide6,  #s8:checked ~ #slide7,
+	#s9:checked ~ #slide8,  #s10:checked ~ #slide9,
+	#s11:checked ~#slide10, #s12:checked ~ #slide11,
+	#s13:checked ~#slide12 {
+		box-shadow: 0 35px 44px 0 rgba(0,0,0,.3), 0 13px 21px 0 rgba(0,0,0,.60);
+		transform: translate3d(-15%,0,-25px);
+	}
+	
+	#s1:checked ~ #slide1, #s2:checked ~ #slide2,
+	#s3:checked ~ #slide3, #s4:checked ~ #slide4,
+	#s5:checked ~ #slide5,  #s6:checked ~ #slide6, 
+	#s7:checked ~ #slide7,  #s8:checked ~ #slide8,
+	#s9:checked ~ #slide9,  #s10:checked ~ #slide10,
+	#s11:checked ~#slide11, #s12:checked ~ #slide12,
+	#s13:checked ~#slide13 {
+		box-shadow: 0 40px 54px 0 rgba(0,0,0,.3), 0 15px 25px 0 rgba(0,0,0,.70);
+		transform: translate3d(0,0,0);
+	}
+	
+	#s1:checked ~ #slide2, #s2:checked ~ #slide3,
+	#s3:checked ~ #slide4, #s4:checked ~ #slide5,
+	#s5:checked ~ #slide6,  #s6:checked ~ #slide7, 
+	#s7:checked ~ #slide8,  #s8:checked ~ #slide9,
+	#s9:checked ~ #slide10,  #s10:checked ~ #slide11,
+	#s11:checked ~#slide12, #s12:checked ~ #slide13,
+	#s13:checked ~#slide1 {
+		box-shadow: 0 35px 44px 0 rgba(0,0,0,.3), 0 13px 21px 0 rgba(0,0,0,.60);
+		transform: translate3d(15%,0,-25px);
+	}
+	
+	#s1:checked ~ #slide3, #s2:checked ~ #slide4,
+	#s3:checked ~ #slide5, #s4:checked ~ #slide6,
+	#s5:checked ~ #slide7,  #s6:checked ~ #slide8, 
+	#s7:checked ~ #slide9,  #s8:checked ~ #slide10,
+	#s9:checked ~ #slide11,  #s10:checked ~ #slide12,
+	#s11:checked ~#slide13, #s12:checked ~ #slide1,
+	#s13:checked ~#slide2 {
+		box-shadow: 0 30px 34px 0 rgba(0,0,0,.3), 0 11px 16px 0 rgba(0,0,0,.43);
+		transform: translate3d(30%,0,-50px);
+	}
+	
+	#s1:checked ~ #slide4, #s2:checked ~ #slide5,
+	#s3:checked ~ #slide6, #s4:checked ~ #slide7,
+	#s5:checked ~ #slide8,  #s6:checked ~ #slide9, 
+	#s7:checked ~ #slide10,  #s8:checked ~ #slide11,
+	#s9:checked ~ #slide12,  #s10:checked ~ #slide13,
+	#s11:checked ~#slide1, #s12:checked ~ #slide2,
+	#s13:checked ~#slide3 {
+		box-shadow: 0 25px 24px 0 rgba(0,0,0,.3), 0 9px 11px 0 rgba(0,0,0,.30);
+		transform: translate3d(45%,0,-100px);
+	}
+	
+    #s1:checked ~ #slide5, #s2:checked ~ #slide6,
+	#s3:checked ~ #slide7, #s4:checked ~ #slide8,
+	#s5:checked ~ #slide9,  #s6:checked ~ #slide10, 
+	#s7:checked ~ #slide11,  #s8:checked ~ #slide12,
+	#s9:checked ~ #slide13,  #s10:checked ~ #slide1,
+	#s11:checked ~#slide2, #s12:checked ~ #slide3,
+	#s13:checked ~#slide4 {
+	    box-shadow: 0 20px 14px 0 rgba(0,0,0,.3), 0 6px 7px 0 rgba(0,0,0,.19);
+		transform: translate3d(60%,0,-150px);
+	}
+	
+	
+    #s1:checked ~ #slide6, #s2:checked ~ #slide7,
+	#s3:checked ~ #slide8, #s4:checked ~ #slide9,
+	#s5:checked ~ #slide10,  #s6:checked ~ #slide11, 
+	#s7:checked ~ #slide12,  #s8:checked ~ #slide13,
+	#s9:checked ~ #slide1,  #s10:checked ~ #slide2,
+	#s11:checked ~#slide3, #s12:checked ~ #slide4,
+	#s13:checked ~#slide5 {
+	    box-shadow: 0 15px 10px 0 rgba(0,0,0,.3), 0 2px 2px 0 rgba(0,0,0,.2);
+		transform: translate3d(75%,0,-200px);
+	}
+	
+	#s1:checked ~ #slide7, #s2:checked ~ #slide8,
+	#s3:checked ~ #slide9, #s4:checked ~ #slide10,
+	#s5:checked ~ #slide11,  #s6:checked ~ #slide12, 
+	#s7:checked ~ #slide13,  #s8:checked ~ #slide1,
+	#s9:checked ~ #slide2,  #s10:checked ~ #slide3,
+	#s11:checked ~#slide4, #s12:checked ~ #slide5,
+	#s13:checked ~#slide6 {
+	    box-shadow: 0 10px 4px 0 rgba(0,0,0,.37);
+		transform: translate3d(90%,0,-250px);
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+    
+	#slide1 {background-image: url("/static/images/red-apples.jpg");background-size: cover; }
+	#slide2 { background-image: url("/static/images/grapes.jpg"); background-size: cover; }
+	#slide3 { background-image: url("/static/images/bell pepper.jpg"); background-size: cover;}
+	#slide4 { background-image: url("/static/images/roma-tomato.jpg"); background-size: cover;}
+	#slide5 { background-image: url("/static/images/corn-vs-maize-01.jpg"); background-size: cover;}
+	#slide6 { background-image: url("/static/images/blueberry.jpg"); background-size: cover;}
+	#slide7 { background-image: url("/static/images/strawberry.jpg"); background-size: cover;}
+	#slide8 { background-image: url("/static/images/orange.jpg"); background-size: cover;}
+	#slide9 { background-image: url("/static/images/soybean.jpg"); background-size: cover;}
+	#slide10 { background-image: url("/static/images/potato.jpg"); background-size: cover;}
+	#slide11 { background-image: url("/static/images/peach.jpg"); background-size: cover;}
+	#slide12 { background-image: url("/static/images/cherry.jpg"); background-size: cover;}
+	#slide13 { background-image: url("/static/images/squash.jpg"); background-size: cover;}
+
+	
+	.fileUpload {
+        position: relative;
+        overflow: hidden;
+        margin: 10px;
+    }
+    
+    .fileUpload input.upload {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        font-size: 50px;
+        cursor: pointer;
+        opacity: 0;
+        filter: alpha(opacity=0);
+    }
+	
+	:root{
+		--background-dark: #2d3548;
+		--text-light: rgba(255,255,255,0.6);
+		--text-lighter: rgba(255,255,255,0.9);
+		--spacing-s: 8px;
+		--spacing-m: 16px;
+		--spacing-l: 24px;
+		--spacing-xl: 32px;
+		--spacing-xxl: 64px;
+		--width-container: 1200px;
+	}
+	
+	
+	*{
+		border: 0;
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	
+
+	
+	.hero-section{
+		align-items: flex-start;
+		background-image: linear-gradient(15deg, #0f4667 0%, #2a6973 150%);
+		display: flex;
+		min-height: 100%;
+		justify-content: center;
+		padding: var(--spacing-xxl) var(--spacing-l);
+	}
+	
+	.card-grid{
+		display: grid;
+		grid-template-columns: repeat(1, 1fr);
+		grid-column-gap: var(--spacing-l);
+		grid-row-gap: var(--spacing-l);
+		max-width: var(--width-container);
+		width: 100%;
+	}
+	
+	@media(min-width: 540px){
+	.card-grid{
+		grid-template-columns: repeat(2, 1fr); 
+	}
+	}
+	
+	@media(min-width: 960px){
+	.card-grid{
+		grid-template-columns: repeat(4, 1fr); 
+	}
+	}
+	
+	.card{
+		list-style: none;
+		position: relative;
+	}
+	
+	.card:before{
+		content: '';
+		display: block;
+		padding-bottom: 150%;
+		width: 100%;
+	}
+	
+	.card__background{
+		background-size: cover;
+		background-position: center;
+		border-radius: var(--spacing-l);
+		bottom: 0;
+		filter: brightness(0.75) saturate(1.2) contrast(0.85);
+		left: 0;
+		position: absolute;
+		right: 0;
+		top: 0;
+		transform-origin: center;
+		trsnsform: scale(1) translateZ(0);
+		transition: 
+			filter 200ms linear,
+			transform 200ms linear;
+	}
+	
+	.card:hover .card__background{
+		transform: scale(1.05) translateZ(0);
+	}
+	
+	.card-grid:hover > .card:not(:hover) .card__background{
+		filter: brightness(0.5) saturate(0) contrast(1.2) blur(20px);
+	}
+	
+	.card__content{
+		left: 0;
+		padding: var(--spacing-l);
+		position: absolute;
+		top: 0;
+	}
+	
+	.card__category{
+		color: var(--text-light);
+		font-size: 0.9rem;
+		margin-bottom: var(--spacing-s);
+		text-transform: uppercase;
+	}
+	
+	.card__heading{
+		color: var(--text-lighter);
+		font-size: 1.9rem;
+		text-shadow: 2px 2px 20px rgba(0,0,0,0.2);
+		line-height: 1.4;
+		word-spacing: 100vw;
+	}
+        
+    #navbar {
+      overflow: hidden;
+      background-color: #f1f1f1;
+      padding: 90px 70px;
+      transition: 0.4s;
+      position: fixed;
+      width: 100%;
+      top: 0;
+      z-index: 99;
+      background: linear-gradient(to bottom, rgba(0,0,0,0.7) 0%,rgba(0,0,0,0.7) 100%) , url(/static/images/plant.jpg);
+    }
+
+    #navbar a {
+      float: left;
+      color: white;
+      text-align: center;
+      padding: 12px;
+      text-decoration: none;
+      font-size: 18px; 
+      line-height: 25px;
+      border-radius: 4px;
+    }
+
+    #navbar #logo {
+      font-size: 35px;
+      font-weight: bold;
+      transition: 0.4s;
+    }
+
+    #navbar a:hover {
+      background-color: #ddd;
+      color: black;
+    }
+
+    #navbar a.active {
+      background-color: #008000;
+      color: white;
+    }
+
+    #navbar-right {
+      float: right;
+    }
+
+    @media screen and (max-width: 580px) {
+      #navbar {
+        padding: 20px 10px !important;
+      }
+      #navbar a {
+        float: none;
+        display: block;
+        text-align: left;
+      }
+      #navbar-right {
+        float: none;
+      }
+    }
+    .button {
+      background-color: #4CAF50; /* Green */
+      border: none;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+    }
+
+    .button1 {border-radius: 50%;}
+        * {
+            margin: 0px;
+            padding: 0px;
+            box-sizing: border-box;
+
+
+        }
+
+        .carousel-inner img {
+            height: 30vh;
+        }
+
+        form {
+            display: flex;
+           
+            justify-content: center;
+            align-items: center;
+            margin-top: 50px;
+            width: 60%;
+            text-align: center;
+            margin: auto;
+        }
+
+
+            top: 100px;
+            margin: auto;
+            color: rgb(18, 231, 231);
+            font-size: 3rem;
+        }        .details h2 {
+            
+            position: relative;
+
+
+        label:hover {
+            transform: scale(1.03);
+        }
+
+        .details h2 {
+            /* margin-bottom: 300px; */
+            position: relative;
+            top: 100px;
+            margin: auto;
+            color: rgb(18, 231, 231);
+            font-size: 3rem;
+
+        }
+
+        .gallery-h1 h1 {
+
+            background-color: rgb(44, 43, 43);
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+
+        }
+
+
+
+
+
+        .details h1 {
+            color: white;
+            padding: 20px;
+            border-radius: 15px;
+            background-color: rgb(45, 47, 49);
+        }
+
+        .upload {
+
+            font-size: 40px;
+            background-color: rgb(255, 252, 252);
+            border-radius: 40px;
+            outline: none;
+            width: 315px;
+            color: rgb(0, 0, 0);
+            border: 3px solid rgb(45, 47, 49);
+
+
+
+        }
+
+        ::-webkit-file-upload-button {
+            color: white;
+            padding: 20px;
+            border: 2px solid rgb(129, 129, 129);
+            background-color: rgb(129, 129, 129);
+            border-radius: 15px;
+
+        }
+
+        ::-webkit-file-upload-button:hover {
+            border-radius: 20px;
+            border: 2px solid rgb(177, 174, 174);
+
+
+        }
+
+
+
+        input[type="submit"] {
+            position: absolute;
+            margin-top: 150px;
+            padding: 15px 35px;
+            background-color: white;
+            border-radius: 15px;
+            color: black;
+            font-size: 1.5rem;
+            border: 4px solid rgb(31, 185, 190);
+        }
+
+        .carousel-caption {
+            background: rgba(24, 25, 26, 0.5);
+            border-radius: 10px;
+        }
+
+
+
+        .carousel-caption h3 {
+
+
+            font-family: 'Rowdies', cursive;
+            color: yellow;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+
+        }
+
+        .carousel-caption p {
+            padding: 7px;
+
+
+        }
+
+        .img-thumbnail {
+            height: 300px;
+        }
+
+        .Content-h5 {
+
+            padding: 15px;
+            background-color: rgb(153, 156, 150);
+            color: white;
+            border-radius: 15px;
+            margin-bottom: 25px;
+        }
+        
+        
+		:root{
+			--background-dark: #2d3548;
+			--text-light: rgba(255,255,255,0.6);
+			--text-lighter: rgba(255,255,255,0.9);
+			--spacing-s: 8px;
+			--spacing-m: 16px;
+			--spacing-l: 24px;
+			--spacing-xl: 32px;
+			--spacing-xxl: 64px;
+			--width-container: 1200px;
+		}
+		
+		  @media only screen and (max-width: 325px) {
+            body {
+                font-size: x-small;
+            }
+        }
+		
+		
+	
+	
+	
+
+@use postcss-mixins;
+@use postcss-nested;
+@use postcss-simple-vars;
+
+@define-mixin atMedium {
+   	@media (min-width: 600px) {
+   		@mixin-content;
+   	}
+}
+@define-mixin atLarge {
+   	@media (min-width: 900px) {
+   		@mixin-content;
+   	}
+}
+
+$card-height-large-screen: 20rem;
+$card-height-mobile: 12rem;
+
+* {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+   font-family: "Open Sans";
+}
+
+
+
+.content-wrapper {
+   	margin: 0 auto;
+   	max-width: 1200px;
+   	display: flex;
+   	flex-flow: row wrap;
+   	justify-content: center;
+   	padding: 0.5rem;
+}
+
+.news-card {
+   	border: 0px solid aqua;
+   	margin: 0.5rem;
+   	position: relative;
+   	height: $card-height-mobile;
+   	@mixin atLarge {
+   		height: $card-height-large-screen;
+   	}
+   	overflow: hidden;
+   	border-radius: 0.5rem;
+   	flex: 1;
+   	min-width: 290px;
+   	box-shadow: 0 0 1rem rgba(0, 0, 0, 0.5);
+   	-webkit-backface-visibility: hidden;
+   	-moz-backface-visibility: hidden;
+   	-webkit-transform: translate3d(0, 0, 0);
+   	-moz-transform: translate3d(0, 0, 0);
+   	&::before {
+   		content: '';
+   		position: absolute;
+   		top: 0;
+   		left: 0;
+   		width: 100%;
+   		height: 100%;
+   		background: rgba(0, 0, 0, 0) linear-gradient(to bottom, rgba(0, 0, 0, 0) 50%, rgba(0, 0, 0, 0.7) 80%);;
+   		z-index: 0;
+	}
+
+   	&__card-link {
+   		position: absolute;
+   		top: 0;
+   		left: 0;
+   		width: 100%;
+   		height: 100%;
+   		z-index: 1;
+   	/*     background: rgba(255,0,0,.5); */
+   	}
+
+   	&__image {
+   		width: 100%;
+   		height: 100%;
+   		display: block;
+   		object-fit: cover;
+   		transition: transform 3s ease;
+   		-webkit-backface-visibility: hidden;
+   		backface-visibility: hidden;
+   		position: relative;
+   		z-index: -1;
+   	}
+   	&__text-wrapper {
+   		position: absolute;
+   		bottom: 0rem;
+   		padding: 1rem;
+   		color: white;
+/*     background-color: rgba(0, 0, 0, 0.4); */
+   		transition: background-color 1.5s ease;
+   	}
+   	&__title {
+   		transition: color 1s ease;
+   		margin-bottom: .5rem;
+   	}
+   	&__post-date {
+   		font-size: .7rem;
+   		margin-bottom: .5rem;
+   		color: #CCC;
+   	}
+   	&__details-wrapper {
+   		max-height: 0;
+   		opacity: 0;
+   		transition: max-height 1.5s ease, opacity 1s ease;
+   	}
+   	@mixin atLarge {
+   		&:hover &__details-wrapper {
+       		max-height: $card-height-large-screen;
+       		opacity: 1;
+   		}
+   		&:hover &__text-wrapper {
+       		background-color: rgba(0, 0, 0, 0.6);
+   		}
+   		&:hover &__title {
+       		color: yellow;
+       	}
+   		&:hover &__image {
+       		transform: scale(1.2);
+       		z-index: -1;
+   		}
+   	}
+   	&__excerpt {
+   		font-weight: 300;
+   	}
+   	&__read-more {
+   		background: black;
+   		color: #bbb;
+   		display: block;
+	    : 0.4rem 0.6rem;
+   		border-radius: 0.3rem;
+   		margin-top: 1rem;
+   		border: 1px solid #444;
+   		font-size: 0.8rem;
+   		-webkit-backface-visibility: hidden;
+   		backface-visibility: hidden;
+   		text-decoration: none;
+   		width: 7rem;
+   		margin-left: auto;
+   		position: relative;
+   		z-index: 5;
+   		i {
+       		position: relative;
+       		left: 0.2rem;
+       		color: #888;
+       		transition: left 0.5s ease, color 0.6s ease;
+       		-webkit-backface-visibility: hidden;
+       		backface-visibility: hidden;
+   		}
+   		&:hover i {
+       		left: 0.5rem;
+       		color: yellow;
+   		}
+   	}
+}
+	
+	
+
+      
+        
+        
+
+
+  #myDIV {
+        display : none;
+}
+
+.img-preview {
+    width: 256px;
+    height: 256px;
+    position: center;
+    border: 5px solid #F8F8F8;
+    box-shadow: 0px 2px 4px 0px rgba(0, 0, 0, 0.1);
+    margin-top: 1em;
+    margin-bottom: 1em;    
+    justify-content: center;
+    text-align: center;
+}
+
+.img-preview>div {
+    width: 100%;
+    height: 100%;
+    background-size: 256px 256px;
+    background-repeat: no-repeat;
+    background-position: center;
+    justify-content: center;
+    text-align: center;
+}
+
+
+
+.upload-label{
+    display: inline-block;
+    padding: 12px 30px;
+    background: #39D2B4;
+    color: #fff;
+    font-size: 1em;
+    transition: all .4s;
+    cursor: pointer;
+}
+
+.upload-label:hover{
+    background: #34495E;
+    color: #39D2B4;
+}
+
+.loader {
+    border: 8px solid #f3f3f3; /* Light grey */
+    border-top: 8px solid #3498db; /* Blue */
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+
+
+
+
+	
+
+
+
+		
+		
+	</style>
+
+
+</head>
+
+<body>
+<header>
+    <div id="navbar">
+  <a href="#default" id="logo" >PLANT DISEASE PREDICTION</a>
+  <div id="navbar-right">
+    <a class="active" href="#home">Home</a>
+    <a href="#contact">Contact</a>
+    <a href="#about">About</a>
+  </div>
+</div>
+    </header>
+    
+ <section>
+
+        <div class="container-fluid details">
+            <h1 class="text-center mt-5 ">Predict Plant Disease & Get Cure</h1>
+
+        </div>
+    </section>
+
+
+<section>
+
+        <div class="container-fluid details">
+            <h3 class="text-center mt-4 mb-4" style="font-size: 2rem;">Choose image | Click on Predict</h3>
+             <div class="text-center mt-5 ">
+            <img id="blah" src="#" alt="" />
+            </div>
+            <form action="/predict" method="post" enctype="multipart/form-data" onsubmit="showloading()">
+                <div class="fileUpload btn btn-success">
+                <span>Choose a leaf</span>
+                <input type="file" class="upload" name="image" onchange="readURL(this);">
+                </div>
+                <div>
+                <input type="submit" value="Predict" class="button button1" >
+                
+                </div>
+            </form>
+            
+        </div>
+    </section>
+
+<section id="slider">
+  <input type="radio" name="slider" id="s1">
+  <input type="radio" name="slider" id="s2">
+  <input type="radio" name="slider" id="s3">
+  <input type="radio" name="slider" id="s4">
+  <input type="radio" name="slider" id="s5">
+  <input type="radio" name="slider" id="s6">
+  <input type="radio" name="slider" id="s7" checked>
+  <input type="radio" name="slider" id="s8">
+  <input type="radio" name="slider" id="s9">
+  <input type="radio" name="slider" id="s10">
+  <input type="radio" name="slider" id="s11">
+  <input type="radio" name="slider" id="s12">
+  <input type="radio" name="slider" id="s13">
+  <label for="s1" id="slide1"></label>
+  <label for="s2" id="slide2"></label>
+  <label for="s3" id="slide3"></label>
+  <label for="s4" id="slide4"></label>
+  <label for="s5" id="slide5"></label>
+  <label for="s6" id="slide6"></label>
+  <label for="s7" id="slide7"></label>
+  <label for="s8" id="slide8"></label>
+  <label for="s9" id="slide9"></label>
+  <label for="s10" id="slide10"></label>
+  <label for="s11" id="slide11"></label>
+  <label for="s12" id="slide12"></label>
+  <label for="s13" id="slide13"></label>
+
+</section>
+
+
+<section id="about" class="about">
+      <div class="container" data-aos="fade-up">
+
+        <div class="text-center mt-4 mb-4"">
+          <h2>Plant Disease</h2>
+        </div>
+
+        <div class="row content">
+          <div class="col-lg-6">
+          <p>
+            Plant disease, an impairment of the normal state of a plant that interrupts or modifies its vital functions. All species of plants, wild and cultivated alike, are subject to disease. </p>
+            <p>Although each species is susceptible to characteristic diseases, these are, in each case, relatively few in number. The occurrence and prevalence of plant diseases vary from season to season, depending on the presence of the pathogen, environmental conditions, and the crops and varieties grown. Some plant varieties are particularly subject to outbreaks of diseases while others are more resistant to them.
+          </p>
+            <p><a class="cta-btn align-middle" href="https://plantvillage.psu.edu/topics/cotton/infos/diseases_and_pests_description_uses_propagation" target="_blank">Source</a></p>
+            <ul>
+<!--              <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>-->
+<!--              <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>-->
+<!--              <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>-->
+            </ul>
+          </div>
+          <div class="col-lg-6 pt-4 pt-lg-0">
+            <p>
+              <strong>Definitions of plant disease</strong>
+            In general, a plant becomes diseased when it is continuously disturbed by some causal agent that results in an abnormal physiological process that disrupts the plant’s normal structure, growth, function, or other activities. This interference with one or more of a plant’s essential physiological or biochemical systems elicits characteristic pathological conditions or symptoms.</p>
+              <p><strong>Cause:</strong>
+            Fungus</p>
+              <p><strong>Comments:</strong>
+            Plants stressed by drought, nutrient deficiency and other pests are more susceptible to the disease; fungus spreads rapidly in dense canopies, especially during periods of warm, wet weather.
+            </p>
+            
+            <ul>
+<!--              <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>-->
+<!--              <li><i class="ri-check-double-line"></i> Duis aute irure dolor in reprehenderit in voluptate velit</li>-->
+<!--              <li><i class="ri-check-double-line"></i> Ullamco laboris nisi ut aliquip ex ea commodo consequat</li>-->
+            </ul>
+<!--            <a href="#" class="btn-learn-more">Learn More</a>-->
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Us Section -->
+
+
+<div class="text-center mt-4 mb-4"">
+          <h2>Nature and importance of plant diseases</h2>
+          
+          
+          <div class="text-center ">
+           <p>Plant diseases are known from times preceding the earliest writings. Fossil evidence indicates that plants were affected by disease 250 million years ago. The Bible and other early writings mention diseases, such as rusts, mildews, and blights, that have caused famine and other drastic changes in the economy of nations since the dawn of recorded history. Other plant disease outbreaks with similar far-reaching effects in more recent times include late blight of potato in Ireland (1845–60); powdery and downy mildews of grape in France (1851 and 1878); coffee rust in Ceylon (now Sri Lanka; starting in the 1870s); Fusarium wilts of cotton and flax; southern bacterial wilt of tobacco (early 1900s); Sigatoka leaf spot and Panama disease of banana in Central America (1900–65); black stem rust of wheat (1916, 1935, 1953–54); southern corn leaf blight (1970) in the United States; Panama disease of banana in Asia, Australia, and Africa (1990 to present); and coffee rust in Central and South America (1960, 2012 to present). Such losses from plant diseases can have a significant economic impact, causing a reduction in income for crop producers and distributors and higher prices for consumers.</p>
+           
+        </div>
+        </div>
+        
+<div class="row content">
+<div class="col-lg-6">
+<div class="infocardContainer">
+  <div id="main">
+    <img src="https://hgtvhome.sndimg.com/content/dam/images/hgtv/fullset/2018/5/23/0/shutterstock_298286450-Studio-Barcelona_blueberries.jpg.rend.hgtvcom.1280.960.suffix/1518122785407.jpeg"></img>
+  </div>
+  <div id="textbois">
+    <h2>Blueberry</h2>
+    <h2>Healthy</h2>
+    <div id="hotlinks">
+      <a href="https://www.britannica.com/science/plant-disease"><img id="codepenio" src="https://image.flaticon.com/icons/png/512/31/31714.png" target="_blank"></img>
+      </a>
+      
+    </div>
+  </div>
+</div>
+  </div>
+
+
+<div class="infocardContainer">
+  <div id="main">
+    <img src="/static/images/soybean.jpg"></img>
+  </div>
+  <div id="textbois">
+    <h2>Soybean</h2>
+    <h2>Healthy</h2>
+    <!--<h4>Bracts flare widely from the bud, flower and </h4> -->
+   
+    <div id="hotlinks">
+      <a href="http://agropedia.iitk.ac.in/content/cultivated-species-cotton"><img id="codepenio" src="https://image.flaticon.com/icons/png/512/892/892917.png" target="_blank"></img>
+      </a>
+      
+    </div>
+  </div>
+</div>
+
+
+
+<div class="col-lg-6">
+<div class="infocardContainer">
+  <div id="main">
+    <img src="/static/images/raspberry.jpg"></img>
+  </div>
+  <div id="textbois">
+    <h2>Raspberry</h2>
+    <h2>Healthy</h2>
+  
+    <div id="hotlinks">
+      <a href="http://agropedia.iitk.ac.in/content/cultivated-species-cotton"><img id="codepenio" src="https://image.flaticon.com/icons/png/512/1635/1635265.png" target="_blank"></img>
+      </a>
+      
+    </div>
+  </div>
+</div>
+</div>
+
+<div class="infocardContainer">
+  <div id="main">
+      <img src="https://media.istockphoto.com/photos/ripe-red-apple-closeup-with-apple-orchard-in-the-background-picture-id920396082?k=20&m=920396082&s=612x612&w=0&h=uc5jnTKTCsLrTrcMcwAH_xVp6jAHFpPY5mXlplu3msM="></img>
+  </div>
+  <div id="textbois">
+    <h2>Apple</h2>
+    <h2>Healthy</h2>
+   
+    <div id="hotlinks">
+      <a href="http://agropedia.iitk.ac.in/content/cultivated-species-cotton"><img id="codepenio" src="https://image.flaticon.com/icons/png/512/846/846406.png" target="_blank"></img>
+      </a>
+      
+    </div>
+  </div>
+</div>
+</div>
+
+       <div class="text-center mt-4 mb-4"">
+          <h2>Common Diseases in Plants</h2>
+
+        
+        <section class="card-area">
+
+            <!-- Card: apple -->
+            <section class="card-section">
+                <div class="card">
+                    <div class="flip-card">
+                        <div class="flip-card__container">
+                            <div class="card-front">
+                                <div class="card-front__tp card-front__tp--apple">
+                                   
+
+                               <h2 class="card-front__heading">
+                                Apple
+                            </h2>
+                            <p class="card-front__text-price">
+                                3
+                            </p>
+                                </div>
+
+                                <div class="card-front__bt">
+                                    <p class="card-front__text-view card-front__text-view--apple">
+                                        View diseases
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <img class="video__container" 
+                                     src="/static/images/red-apples.jpg">
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inside-page">
+                        <div class="inside-page__container">
+                            <h3 class="inside-page__heading inside-page__heading--apple">
+                                Diseases
+                            </h3>
+                            <p class="inside-page__text">
+                               Apple___Apple_scab
+                               Apple___Black_rot
+                               Apple___Cedar_apple_rust
+
+                            </p>
+                            
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Card: corn -->
+            <section class="card-section">
+                <div class="card">
+                    <div class="flip-card">
+                        <div class="flip-card__container">
+                            <div class="card-front">
+                                <div class="card-front__tp card-front__tp--corn">
+                                    
+                                               <h2 class="card-front__heading">
+                                                   Corn
+                                               </h2>
+                                               <p class="card-front__text-price">
+                                                   3
+                                               </p>
+                                </div>
+
+                                <div class="card-front__bt">
+                                    <p class="card-front__text-view card-front__text-view--corn">
+                                        View diseases
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="card-back">
+                                <img class="video__container" 
+                                     src="/static/images/corn-vs-maize-01.jpg">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inside-page">
+                        <div class="inside-page__container">
+                            <h3 class="inside-page__heading inside-page__heading--corn">
+                                Diseases
+                            </h3>
+                            <p class="inside-page__text">
+                               Corn(maize)___Cercospora_leaf_
+                               spot Gray_leaf_spot
+                               Corn(maize)___Common_rust_
+                               Corn(maize)___Northern_Leaf_
+                               Blight
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Card: Orange -->
+            <section class="card-section">
+                <div class="card">
+                    <div class="flip-card">
+                        <div class="flip-card__container">
+                            <div class="card-front">
+                                <div class="card-front__tp card-front__tp--orange">
+                                   
+                               
+                                               <h2 class="card-front__heading">
+                                                   Orange
+                                               </h2>
+                                               <p class="card-front__text-price">
+                                                   1
+                                               </p>
+                                </div>
+
+                                <div class="card-front__bt">
+                                    <p class="card-front__text-view card-front__text-view--orange">
+                                        View diseases
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <img class="video__container" 
+                                     src="/static/images/orange.jpg">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inside-page">
+                        <div class="inside-page__container">
+                            <h3 class="inside-page__heading inside-page__heading--orange">
+                                Diseases
+                            </h3>
+                            <p class="inside-page__text">
+                                Orange___Haunglongbing_
+                                (Citrus_greening)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Card: Grape -->
+            <section class="card-section">
+                <div class="card">
+                    <div class="flip-card">
+                        <div class="flip-card__container">
+                            <div class="card-front">
+                                <div class="card-front__tp card-front__tp--grape">
+                                   
+                                               <h2 class="card-front__heading">
+                                                    Grape
+                                               </h2>
+                                               <p class="card-front__text-price">
+                                                   3
+                                               </p>
+                                </div>
+
+                                <div class="card-front__bt">
+                                    <p class="card-front__text-view card-front__text-view--grape">
+                                        View diseases
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <img class="video__container" 
+                                     src="/static/images/grapes.jpg">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inside-page">
+                        <div class="inside-page__container">
+                            <h3 class="inside-page__heading inside-page__heading--grape">
+                                Diseases
+                            </h3>
+                            <p class="inside-page__text">
+                               Grape___Black_rot
+                               Grape___Esca_(Black_Measles)
+                               Grape___Leaf_blight_(Isariopsis_
+                               Leaf_Spot)
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+        
+        <section class="card-area">
+
+            <!-- Card: peach -->
+            <section class="card-section">
+                <div class="card">
+                    <div class="flip-card">
+                        <div class="flip-card__container">
+                            <div class="card-front">
+                                <div class="card-front__tp card-front__tp--peach">
+                                    
+                               <h2 class="card-front__heading">
+                                Peach
+                            </h2>
+                            <p class="card-front__text-price">
+                                1
+                            </p>
+                                </div>
+
+                                <div class="card-front__bt">
+                                    <p class="card-front__text-view card-front__text-view--peach">
+                                        View diseases
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <img class="video__container" 
+                                     src="/static/images/peach.jpg">
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inside-page">
+                        <div class="inside-page__container">
+                            <h3 class="inside-page__heading inside-page__heading--peach">
+                                Diseases
+                            </h3>
+                            <p class="inside-page__text">
+                               Peach___Bacterial_spot
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Card: pepperbell -->
+            <section class="card-section">
+                <div class="card">
+                    <div class="flip-card">
+                        <div class="flip-card__container">
+                            <div class="card-front">
+                                <div class="card-front__tp card-front__tp--pepperbell">
+                                   
+
+                               <h2 class="card-front__heading">
+                                Bell Pepper
+                            </h2>
+                            <p class="card-front__text-price">
+                                1
+                            </p>
+                                </div>
+
+                                <div class="card-front__bt">
+                                    <p class="card-front__text-view card-front__text-view--pepperbell">
+                                        View diseases
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <img class="video__container" 
+                                     src="/static/images/bell pepper.jpg">
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inside-page">
+                        <div class="inside-page__container">
+                            <h3 class="inside-page__heading inside-page__heading--pepperbell">
+                                Diseases
+                            </h3>
+                            <p class="inside-page__text">
+                               Pepper,_bell___Bacterial_spot
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Card: potato -->
+            <section class="card-section">
+                <div class="card">
+                    <div class="flip-card">
+                        <div class="flip-card__container">
+                            <div class="card-front">
+                                <div class="card-front__tp card-front__tp--potato">
+                                    
+
+                               <h2 class="card-front__heading">
+                                Potato
+                            </h2>
+                            <p class="card-front__text-price">
+                                2
+                            </p>
+                                </div>
+
+                                <div class="card-front__bt">
+                                    <p class="card-front__text-view card-front__text-view--potato">
+                                        View diseases
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <img class="video__container" 
+                                     src="/static/images/potato.jpg">
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inside-page">
+                        <div class="inside-page__container">
+                            <h3 class="inside-page__heading inside-page__heading--potato">
+                                Diseases
+                            </h3>
+                            <p class="inside-page__text">
+                               Potato___Early_blight
+                               Potato___Late_blight
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Card: cherry -->
+            <section class="card-section">
+                <div class="card">
+                    <div class="flip-card">
+                        <div class="flip-card__container">
+                            <div class="card-front">
+                                <div class="card-front__tp card-front__tp--cherry">
+                                   
+
+                               <h2 class="card-front__heading">
+                                Cherry
+                            </h2>
+                            <p class="card-front__text-price">
+                                1
+                            </p>
+                                </div>
+
+                                <div class="card-front__bt">
+                                    <p class="card-front__text-view card-front__text-view--cherry">
+                                        View diseases
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <img class="video__container" 
+                                     src="/static/images/cherry.jpg">
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inside-page">
+                        <div class="inside-page__container">
+                            <h3 class="inside-page__heading inside-page__heading--cherry">
+                                Diseases
+                            </h3>
+                            <p class="inside-page__text">
+                               Cherry_(including_sour)___
+                               Powdery_mildew
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            </section>
+            
+            <section class="card-area">
+
+            <!-- Card: squash -->
+            <section class="card-section">
+                <div class="card">
+                    <div class="flip-card">
+                        <div class="flip-card__container">
+                            <div class="card-front">
+                                <div class="card-front__tp card-front__tp--squash">
+                                   
+
+                               <h2 class="card-front__heading">
+                                Squash
+                            </h2>
+                            <p class="card-front__text-price">
+                                1
+                            </p>
+                                </div>
+
+                                <div class="card-front__bt">
+                                    <p class="card-front__text-view card-front__text-view--squash">
+                                        View diseases
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <img class="video__container" 
+                                     src="/static/images/squash.jpg">
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inside-page">
+                        <div class="inside-page__container">
+                            <h3 class="inside-page__heading inside-page__heading--squash">
+                                Diseases
+                            </h3>
+                            <p class="inside-page__text">
+                               Squash___Powdery_mildew
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Card: strawberry -->
+            <section class="card-section">
+                <div class="card">
+                    <div class="flip-card">
+                        <div class="flip-card__container">
+                            <div class="card-front">
+                                <div class="card-front__tp card-front__tp--strawberry">
+                                    
+
+                               <h2 class="card-front__heading">
+                                Strawberry
+                            </h2>
+                            <p class="card-front__text-price">
+                                1
+                            </p>
+                                </div>
+
+                                <div class="card-front__bt">
+                                    <p class="card-front__text-view card-front__text-view--strawberry">
+                                        View diseases
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <img class="video__container" 
+                                     src="/static/images/strawberry.jpg">
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inside-page">
+                        <div class="inside-page__container">
+                            <h3 class="inside-page__heading inside-page__heading--strawberry">
+                                Diseases
+                            </h3>
+                            <p class="inside-page__text">
+                              Strawberry___Leaf_scorch
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- Card: tomato -->
+            <section class="card-section">
+                <div class="card">
+                    <div class="flip-card">
+                        <div class="flip-card__container">
+                            <div class="card-front">
+                                <div class="card-front__tp card-front__tp--tomato">
+                                   
+
+                               <h2 class="card-front__heading">
+                               Tomato
+                            </h2>
+                            <p class="card-front__text-price">
+                                3
+                            </p>
+                                </div>
+
+                                <div class="card-front__bt">
+                                    <p class="card-front__text-view card-front__text-view--tomato">
+                                        View diseases
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="card-back">
+                                <img class="video__container" 
+                                     src="/static/images/roma-tomato.jpg">
+                                
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="inside-page">
+                        <div class="inside-page__container">
+                            <h3 class="inside-page__heading inside-page__heading--tomato">
+                             Diseases
+                            </h3>
+                            <p class="inside-page__text">
+                              Tomato___Bacterial_spot
+                              Tomato___Early_blight
+                              Tomato___Late_blight
+                              Tomato___Leaf_Mold
+                              Tomato___Target_Spot
+
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </section>
+         
+
+
+       
+
+<div class="text-center mt-4 mb-4"">
+          <h2>Top 4 Agricultural Producing Countries in World</h2>
+</div>
+          
+<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+
+<section class="hero-section">
+  <div class="card-grid">
+    <a class="card" href="#">
+      <div class="card__background" style="background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_Zc6_zX2ad3U2EWPgjHczv8Y98iKpYEwFoVFel5OIeKX2cu-yQ8h_EqEqVJDRYSGR2qc&usqp=CAU)"></div>
+      <div class="card__content">
+        <p class="card__category">Number 1</p>
+        <h3 class="card__heading">China</h3>
+      </div>
+    </a>
+    <a class="card" href="#">
+      <div class="card__background" style="background-image: url(https://st2.depositphotos.com/2172651/6848/i/950/depositphotos_68486033-stock-photo-united-states-waving-flag-overlay.jpg)"></div>
+      <div class="card__content">
+        <p class="card__category">Number 2</p>
+        <h3 class="card__heading">United States</h3>
+      </div>
+    </li>
+    <a class="card" href="#">
+      <div class="card__background" style="background-image: url(https://st2.depositphotos.com/1828395/9177/i/950/depositphotos_91776220-stock-photo-brazil-flag-map.jpg)"></div>
+      <div class="card__content">
+        <p class="card__category">Number 3</p>
+        <h3 class="card__heading">Brazil</h3>
+      </div>
+    </a>
+     <a class="card" href="#">
+      <div class="card__background" style="background-image: url(https://us.123rf.com/450wm/vectomart/vectomart1712/vectomart171200130/92178908-tricolor-indian-flag-map-background-for-republic-and-independence-day-of-india.jpg?ver=6)"></div>
+      <div class="card__content">
+        <p class="card__category">Number 4</p>
+        <h3 class="card__heading">India</h3>
+      </div>
+    </a>
+  <div>
+</section>
+
+        
+ 
+
+
+
+
+<script>
+// When the user scrolls down 80px from the top of the document, resize the navbar's padding and the logo's font size
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 80 || document.documentElement.scrollTop > 80) {
+    document.getElementById("navbar").style.padding = "30px 10px";
+    document.getElementById("logo").style.fontSize = "25px";
+  } else {
+    document.getElementById("navbar").style.padding = "80px 10px";
+    document.getElementById("logo").style.fontSize = "35px";
+  }
+}
+
+
+
+function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah')
+                        .attr('src', e.target.result)
+                        .width(150)
+                        .height(200);
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+</script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
+        integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"
+        integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV"
+        crossorigin="anonymous"></script>
+
+
+<div class="page-wrapper">
+    <div id="waterdrop"></div>
+    <footer>
+      <div class="footer-top">
+        <div class="pt-exebar">
+
+        </div>
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-3 col-md-12 col-sm-12 footer-col-3">
+              <div class="widget footer_widget">
+                <h5 class="footer-title">Address</h5>
+                <div class="gem-contacts">
+                  <div class="gem-contacts-item gem-contacts-address">University of Mumbai,
+                    Shivajirao S. Jondhale College of Engineeering, Dombivli
+                    Sonarpada, Dombivli(E), Thane-421301
+                  </div>
+                  <div class="gem-contacts-item gem-contacts-phone"><i class="fa fa-phone" aria-hidden="true"></i> Phone: <a>+91-7990639057</a></div>
+
+                  <div class="gem-contacts-item gem-contacts-address mt-2">Department:<br> B.E in Computer Engineering
+                  
+                    </div>
+                    <div class="gem-contacts-item gem-contacts-address mt-2">Academic Year:<br> 2021-2024
+                    </div>
+                  <div class="gem-contacts-item gem-contacts-phone"><i class="fa fa-phone" aria-hidden="true"></i> Phone: <a>+91-7990639057</a></div>
+
+                </div>
+              </div>
+
+            </div>
+            <div class="col-12 col-lg-6 col-md-6 col-sm-12">
+              <div class="row">
+                <div class="col-6 col-lg-6 col-md-6 col-sm-6">
+                  <div class="widget footer_widget">
+                    <h5 class="footer-title">Contributors</h5>
+                    <ul class="posts  styled">
+                      <li class="clearfix gem-pp-posts">
+                        <div class="gem-pp-posts-text">
+                          <div class="gem-pp-posts-item">
+                            <a href="#">Khushi Bhika Badgujar
+                            </a>
+                          </div>
+                          <div class="gem-pp-posts-date">khushibadgujar175@@gmail.com</div>
+                        </div>
+                      </li>
+                      <li class="clearfix gem-pp-posts">
+                        <div class="gem-pp-posts-text">
+                          <div class="gem-pp-posts-item">
+                            <a href="#">Prof.Shweta patil 
+                            </a>
+                          </div>
+                          <div class="gem-pe-posts-date">Co-Guide</div>
+
+                        </div>
+                      </li>
+                      <li class="clearfix gem-pp-posts">
+                        <div class="gem-pp-posts-text">
+                          <div class="gem-pp-posts-item">
+                            <a href="">Dr.Uttara Gogate
+                            </a>
+                          </div>
+                          <div class="gem-pe-posts-date">Guide</div>
+                         <div class="gem-pp-posts-date">uttara.gogate16@gmail.com</div>
+
+                        </div>
+                      </li>
+
+                    </ul>
+                  </div>
+                </div>
+                <div class="col-6 col-lg-6 col-md-6 col-sm-6">
+                  <div class="widget">
+                    <h5 class="footer-title">Email Us</h5>
+                    <div class="textwidget">
+                      <div role="form" class="wpcf7" id="wpcf7-f4-o1" lang="en-US" dir="ltr">
+
+                        <form method="post" class="wpcf7-form" novalidate="novalidate">
+
+                          <div class="contact-form-footer">
+                            <p><span class="wpcf7-form-control-wrap your-first-name"><input type="text" name="your-first-name" value="" size="40" class="wpcf7-form-control wpcf7-text" aria-invalid="false" placeholder="Your name"></span></p>
+                            <p><span class="wpcf7-form-control-wrap your-email_1"><input type="email" name="your-email_1" value="" size="40" class="wpcf7-form-control wpcf7-text wpcf7-email wpcf7-validates-as-email" aria-invalid="false" placeholder="Your email"></span></p>
+                            <p><span class="wpcf7-form-control-wrap your-message"><textarea name="your-message" cols="40" rows="10" class="wpcf7-form-control wpcf7-textarea" aria-invalid="false" placeholder="Your message"></textarea></span></p>
+                            <div><input type="submit" value="Send" class="wpcf7-form-control wpcf7-submit"><span class="ajax-loader"></span></div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-lg-3 col-md-5 col-sm-12 footer-col-4">
+              <div class="widget widget_gallery gallery-grid-4">
+                <h5 class="footer-title">Our Gallery</h5>
+                <ul class="magnific-image">
+
+                  <li><a class="magnific-anchor"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmX7aKTzHVtt-wUSX7FqGfBkZav6PtnC54lBCcCgxIkios7uvdtZsFz_03YhTyCHgmUbE&usqp=CAU" alt=""></a></li>
+                  <li><a class="magnific-anchor"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmX7aKTzHVtt-wUSX7FqGfBkZav6PtnC54lBCcCgxIkios7uvdtZsFz_03YhTyCHgmUbE&usqp=CAU" alt=""></a></li>
+                  <li><a class="magnific-anchor"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmX7aKTzHVtt-wUSX7FqGfBkZav6PtnC54lBCcCgxIkios7uvdtZsFz_03YhTyCHgmUbE&usqp=CAU" alt=""></a></li>
+                  <li><a class="magnific-anchor"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmX7aKTzHVtt-wUSX7FqGfBkZav6PtnC54lBCcCgxIkios7uvdtZsFz_03YhTyCHgmUbE&usqp=CAU" alt=""></a></li>
+                  <li><a class="magnific-anchor"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmX7aKTzHVtt-wUSX7FqGfBkZav6PtnC54lBCcCgxIkios7uvdtZsFz_03YhTyCHgmUbE&usqp=CAU" alt=""></a></li>
+                  <li><a class="magnific-anchor"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmX7aKTzHVtt-wUSX7FqGfBkZav6PtnC54lBCcCgxIkios7uvdtZsFz_03YhTyCHgmUbE&usqp=CAU" alt=""></a></li>
+                  <li><a class="magnific-anchor"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmX7aKTzHVtt-wUSX7FqGfBkZav6PtnC54lBCcCgxIkios7uvdtZsFz_03YhTyCHgmUbE&usqp=CAU" alt=""></a></li>
+                  <li><a class="magnific-anchor"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmX7aKTzHVtt-wUSX7FqGfBkZav6PtnC54lBCcCgxIkios7uvdtZsFz_03YhTyCHgmUbE&usqp=CAU" alt=""></a></li>
+                  <li><a class="magnific-anchor"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSmX7aKTzHVtt-wUSX7FqGfBkZav6PtnC54lBCcCgxIkios7uvdtZsFz_03YhTyCHgmUbE&usqp=CAU" alt=""></a></li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <div class="container">
+          <div class="row">
+
+            <div class="col-md-3">
+              <div class="footer-site-info"><a href="http://127.0.0.1:5000/" target="_blank">Cotton Plant Disease Prediction </a><br> © 2021</div>
+            </div>
+
+            <div class="col-md-6">
+              <nav id="footer-navigation" class="site-navigation footer-navigation centered-box" role="navigation">
+                <ul id="footer-menu" class="nav-menu styled clearfix inline-inside">
+                  <li id="menu-item-26" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-26"><a href="#">Support</a></li>
+                  <li id="menu-item-27" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-27"><a href="#">Contact Us</a></li>
+                  <li id="menu-item-28" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-28"><a href="#">Disclaimer</a></li>
+                  <li id="menu-item-29" class="menu-item menu-item-type-custom menu-item-object-custom menu-item-29"><a href="#">Add more</a></li>
+                </ul>
+              </nav>
+            </div>
+
+            <div class="col-md-3">
+              <div id="footer-socials">
+                <div class="socials inline-inside socials-colored">
+
+                  <a href="#" target="_blank" title="Facebook" class="socials-item">
+                    <i class="fab fa-facebook facebook"></i>
+                  </a>
+                  <a href="#" target="_blank" title="Twitter" class="socials-item">
+                    <i class="fab fa-twitter twitter"></i>
+
+                  </a>
+                  <a href="#" target="_blank" title="Instagram" class="socials-item">
+                    <i class="fab fa-instagram instagram"></i>
+                  </a>
+                  <a href="#" target="_blank" title="YouTube" class="socials-item">
+                    <i class="fab fa-youtube youtube"></i>
+                  </a>
+                  <a href="#" target="_blank" title="Telegram" class="socials-item">
+                    <i class="fab fa-telegram telegram"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
+  <script src="https://daniellaharel.com/raindrops/js/raindrops.js"></script>
+
+ <script> jQuery('#waterdrop').raindrops({color:'#1c1f2f', canvasHeight:150, density: 0.1, frequency: 20});
+</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.3/js/bootstrap.bundle.min.js"></script>
+
+</html>
